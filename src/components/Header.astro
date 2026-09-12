@@ -1,0 +1,40 @@
+---
+const navItems = [
+  { href: '/work/', label: 'Work' },
+  { href: '/about/', label: 'About' }
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-line/70 bg-paper/80 backdrop-blur-md">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <a href="/" class="text-sm font-extrabold tracking-[0.2em] uppercase">
+      Sujan
+    </a>
+    <nav class="flex items-center gap-6 text-sm font-medium">
+      {
+        navItems.map((item) => {
+          const active =
+            item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'transition-colors hover:text-accent',
+                active ? 'text-ink' : 'text-ink-soft'
+              ]}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+      <a
+        href="/#get-in-touch"
+        class="rounded-full bg-ink px-4 py-2 text-xs font-semibold text-paper transition-colors hover:bg-accent"
+      >
+        Get in touch
+      </a>
+    </nav>
+  </div>
+</header>

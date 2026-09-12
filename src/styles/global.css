@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/manrope/800.css";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #101014;
+  --color-ink-soft: #52525b;
+  --color-paper: #fafaf9;
+  --color-paper-dim: #f0efec;
+  --color-accent: #ff5a1f;
+  --color-line: #e4e2dd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+.prose-case p {
+  margin-bottom: 1.25em;
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+}
+
+.prose-case h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2.5em;
+  margin-bottom: 0.75em;
+  color: var(--color-ink);
+}
+
+.prose-case ul {
+  margin-bottom: 1.25em;
+  padding-left: 1.25em;
+  list-style: disc;
+  color: var(--color-ink-soft);
+}
+
+.prose-case li {
+  margin-bottom: 0.4em;
+}

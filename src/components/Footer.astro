@@ -1,0 +1,39 @@
+---
+const links = [
+  { href: 'https://www.linkedin.com/in/sujanmongar/', label: 'LinkedIn' },
+  { href: 'https://wa.me/61451716040', label: 'WhatsApp' },
+  { href: 'mailto:sujanallaymongar506@gmail.com', label: 'Email' }
+];
+const year = new Date().getFullYear();
+---
+
+<footer id="get-in-touch" class="border-t border-line/70 bg-paper-dim">
+  <div class="mx-auto max-w-5xl px-6 py-20">
+    <p class="text-xs font-semibold tracking-[0.2em] text-ink-soft uppercase">Get in touch</p>
+    <h2 class="mt-4 max-w-2xl text-3xl font-bold sm:text-4xl">
+      Let's create something meaningful together.
+    </h2>
+    <p class="mt-4 max-w-xl text-ink-soft">
+      Have a product idea or need to improve your user experience? Let's discuss how we can
+      build something clear, scalable, and impactful.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="rounded-full border border-ink/15 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="mt-16 flex flex-col justify-between gap-2 border-t border-line/70 pt-6 text-xs text-ink-soft sm:flex-row">
+      <p>© {year} Sujan Mongar. All rights reserved.</p>
+      <p>Thimphu, Bhutan</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro:assets';
+
+interface GridImage {
+  src: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  images: GridImage[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+  {
+    images.map((img) => (
+      <Image
+        src={img.src}
+        alt={img.alt}
+        width={800}
+        height={800}
+        loading="lazy"
+        class="aspect-square w-full rounded-2xl border border-line/70 object-cover"
+      />
+    ))
+  }
+</div>

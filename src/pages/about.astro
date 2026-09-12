@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experience = (await getCollection('experience')).sort((a, b) => b.data.order - a.data.order);
+---
+
+<BaseLayout
+  title="About"
+  description="Sujan Mongar is a Bhutanese Product Designer (UX/UI) specialising in UX audits, user research, usability testing, wireframing, and high-fidelity UI design for web and mobile products."
+>
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <p class="text-xs font-semibold tracking-[0.2em] text-ink-soft uppercase">About</p>
+    <h1 class="mt-4 text-3xl font-extrabold sm:text-4xl">Sujan Mongar</h1>
+    <p class="mt-1 text-lg text-ink-soft">Product Designer (UX/UI)</p>
+
+    <p class="mt-8 text-lg leading-relaxed text-ink-soft">
+      I am a Bhutanese Product Designer (UX/UI) specialising in UX audits, user research,
+      usability testing, wireframing, and high-fidelity UI design for web and mobile products. I
+      work with startups, growing businesses, and teams to improve user experience, increase
+      usability, and design scalable digital solutions. My approach is UX-first — focused on
+      clarity, structure, and meaningful product outcomes. Available for UX/UI roles, freelance
+      projects, and collaborations worldwide.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-4 text-sm">
+      <span class="rounded-full bg-paper-dim px-4 py-2 font-medium">Thimphu, Bhutan</span>
+      <a
+        href="mailto:sujanallaymongar506@gmail.com"
+        class="rounded-full bg-paper-dim px-4 py-2 font-medium hover:text-accent"
+      >
+        sujanallaymongar506@gmail.com
+      </a>
+      <a href="tel:+61451716040" class="rounded-full bg-paper-dim px-4 py-2 font-medium hover:text-accent">
+        +61 451 716 040
+      </a>
+    </div>
+
+    <a
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-8 inline-block rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-accent"
+    >
+      Download resume
+    </a>
+
+    <div class="mt-14 grid grid-cols-1 gap-8 border-y border-line/70 py-10 sm:grid-cols-3">
+      <div>
+        <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Focus</p>
+        <p class="mt-2 font-medium">UX Flow, UI Systems, and Design Systems</p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Strengths</p>
+        <p class="mt-2 font-medium">Clarity, Consistency, and Delivery</p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Available for</p>
+        <p class="mt-2 font-medium">Full-time, Contract, and Freelance</p>
+      </div>
+    </div>
+
+    {
+      experience.length > 0 && (
+        <div class="mt-16">
+          <h2 class="text-2xl font-bold">Experience</h2>
+          <ol class="mt-8 space-y-8">
+            {experience.map((job) => (
+              <li class="flex flex-col gap-1 border-b border-line/70 pb-8 last:border-0 sm:flex-row sm:justify-between">
+                <div>
+                  <p class="font-bold">{job.data.role}</p>
+                  <p class="text-ink-soft">
+                    {job.data.link ? (
+                      <a href={job.data.link} target="_blank" rel="noopener noreferrer" class="hover:text-accent">
+                        {job.data.company}
+                      </a>
+                    ) : (
+                      job.data.company
+                    )}
+                    {job.data.location && ` · ${job.data.location}`}
+                  </p>
+                </div>
+                <p class="shrink-0 text-sm font-medium text-ink-soft sm:text-right">
+                  {job.data.startDate} — {job.data.endDate ?? 'Present'}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )
+    }
+
+    <p class="mt-16 text-xl font-medium italic">Designing with purpose, building with care.</p>
+  </section>
+</BaseLayout>

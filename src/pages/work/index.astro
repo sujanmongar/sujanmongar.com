@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout
+  title="Work"
+  description="UX/UI case studies by Sujan Mongar — research, audits, and high-fidelity design for web and mobile products."
+>
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <p class="text-xs font-semibold tracking-[0.2em] text-ink-soft uppercase">Selected work</p>
+    <h1 class="mt-4 text-4xl font-extrabold sm:text-5xl">Work I'm proud of</h1>
+    <p class="mt-4 max-w-xl text-ink-soft">
+      Case studies from product design engagements — research, UX audits, and high-fidelity UI
+      across web and mobile.
+    </p>
+
+    <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
+      {work.map((project, i) => <ProjectCard project={project} priority={i === 0} />)}
+    </div>
+  </section>
+</BaseLayout>
