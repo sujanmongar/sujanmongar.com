@@ -4,26 +4,45 @@ interface Props {
   description: string;
   image?: string;
   type?: 'website' | 'article';
+  /** Excludes the page from search indexes — for utility pages like 404,
+      never for real content. */
+  noindex?: boolean;
 }
 
-const { title, description, image = '/og-default.webp', type = 'website' } = Astro.props;
+const { title, description, image, type = 'website', noindex = false } = Astro.props;
 
+const isDefaultImage = !image;
+const ogImageURL = new URL(image ?? '/og-default.webp', Astro.site);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL(image, Astro.site);
 const siteTitle = 'Sujan Mongar — Product Designer (UX/UI)';
 const fullTitle = title === siteTitle ? title : `${title} | Sujan Mongar`;
 ---
 
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonicalURL} />
+<meta name="author" content="Sujan Mongar" />
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <link rel="canonical" href={canonicalURL} />
+)}
 
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageURL} />
+{
+  isDefaultImage && (
+    <>
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={`${siteTitle} — portfolio preview`} />
+    </>
+  )
+}
 <meta property="og:site_name" content="Sujan Mongar" />
+<meta property="og:locale" content="en_US" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />

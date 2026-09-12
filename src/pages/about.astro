@@ -48,7 +48,7 @@ const details = [
 ];
 
 const description =
-  'Sujan Mongar is a Bhutanese Product Designer (UX/UI) specialising in UX audits, user research, usability testing, wireframing, and high-fidelity UI design for web and mobile products.';
+  'Sujan Mongar is a Bhutanese Product Designer (UX/UI) specialising in UX audits, research, usability testing, and high-fidelity UI for web and mobile products.';
 ---
 
 <BaseLayout title="About" description={description}>
@@ -64,12 +64,17 @@ const description =
       description,
       mainEntity: {
         '@type': 'Person',
+        '@id': 'https://sujanmongar.com/#person',
         name: 'Sujan Mongar',
         jobTitle: 'Product Designer (UX/UI)',
+        description,
         url: 'https://sujanmongar.com',
         email: 'mailto:sujanallaymongar506@gmail.com',
         telephone: '+61451716040',
-        nationality: 'Bhutanese',
+        nationality: {
+          '@type': 'Country',
+          name: 'Bhutan'
+        },
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Thimphu',

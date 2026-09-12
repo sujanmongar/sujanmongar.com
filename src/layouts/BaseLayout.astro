@@ -9,9 +9,10 @@ interface Props {
   description: string;
   image?: string;
   type?: 'website' | 'article';
+  noindex?: boolean;
 }
 
-const { title, description, image, type } = Astro.props;
+const { title, description, image, type, noindex } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,7 +23,7 @@ const { title, description, image, type } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#ffffff" />
-    <Seo title={title} description={description} image={image} type={type} />
+    <Seo title={title} description={description} image={image} type={type} noindex={noindex} />
     {/* [data-reveal] content is only ever made visible by the reveal script
         below — if JS is blocked or fails, this keeps it from staying
         invisible forever. */}
@@ -39,15 +40,33 @@ const { title, description, image, type } = Astro.props;
       set:html={JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Person',
+        '@id': 'https://sujanmongar.com/#person',
         name: 'Sujan Mongar',
         jobTitle: 'Product Designer (UX/UI)',
+        description:
+          'Bhutanese Product Designer (UX/UI) specialising in UX audits, user research, usability testing, wireframing, and high-fidelity UI design for web and mobile products.',
         url: 'https://sujanmongar.com',
         email: 'mailto:sujanallaymongar506@gmail.com',
+        nationality: {
+          '@type': 'Country',
+          name: 'Bhutan'
+        },
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Thimphu',
           addressCountry: 'BT'
         },
+        knowsAbout: [
+          'UX Design',
+          'UI Design',
+          'Product Design',
+          'UX Research',
+          'Usability Testing',
+          'Wireframing',
+          'Design Systems',
+          'Prototyping'
+        ],
+        knowsLanguage: ['en'],
         sameAs: ['https://www.linkedin.com/in/sujanmongar/']
       })}
     />

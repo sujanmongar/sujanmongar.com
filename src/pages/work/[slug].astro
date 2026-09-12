@@ -22,6 +22,30 @@ const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
 const currentIndex = allWork.findIndex((p) => p.id === entry.id);
 const prevProject = currentIndex > 0 ? allWork[currentIndex - 1] : null;
 const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1] : null;
+
+// "May 2023" -> "2023-05", for structured data. Falls back to undefined
+// (field omitted) if it's ever a shape this doesn't recognize.
+const MONTHS = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december'
+];
+function timelineToISO(value: string): string | undefined {
+  const [monthName, year] = value.split(' ');
+  const month = MONTHS.indexOf(monthName?.toLowerCase());
+  if (month === -1 || !year) return undefined;
+  return `${year}-${String(month + 1).padStart(2, '0')}`;
+}
+const datePublished = timelineToISO(timeline);
 ---
 
 <BaseLayout title={title} description={summary} image={cover.src} type="article">
@@ -40,14 +64,10 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
       url: new URL(Astro.url.pathname, Astro.site).href,
       keywords: tags.join(', '),
       inLanguage: 'en',
-      author: {
-        '@type': 'Person',
-        name: 'Sujan Mongar',
-        jobTitle: 'Product Designer (UX/UI)',
-        url: 'https://sujanmongar.com'
-      },
-      creator: { '@type': 'Person', name: 'Sujan Mongar' },
+      author: { '@id': 'https://sujanmongar.com/#person' },
+      creator: { '@id': 'https://sujanmongar.com/#person' },
       about: deliverables.join(', '),
+      ...(datePublished ? { datePublished } : {}),
       ...(client ? { sourceOrganization: { '@type': 'Organization', name: client } } : {})
     })}
   />
