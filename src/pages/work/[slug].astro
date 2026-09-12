@@ -114,23 +114,20 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
         ]
           .filter((entry) => entry.project)
           .map(({ project, label }) => (
-            <a
-              href={`/work/${project!.id}/`}
-              class="group flex items-center gap-5 rounded-lg border border-line/70 p-4 transition-colors hover:border-ink/30"
-            >
-              <div class="w-28 shrink-0 overflow-hidden rounded bg-paper-dim sm:w-36">
+            <a href={`/work/${project!.id}/`} class="group flex items-center gap-6">
+              <div class="w-32 shrink-0 overflow-hidden rounded-lg sm:w-44">
                 <Image
                   src={project!.data.cover}
                   alt={project!.data.coverAlt}
-                  width={400}
+                  width={500}
                   quality={92}
                   loading="lazy"
                   class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </div>
               <div class="min-w-0">
-                <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">{label}</p>
-                <h2 class="font-display mt-1 text-lg font-medium italic transition-colors group-hover:text-accent sm:text-xl">
+                <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">{label}</p>
+                <h2 class="font-display mt-2 text-2xl font-medium italic transition-colors group-hover:text-accent sm:text-3xl">
                   {project!.data.title}
                 </h2>
               </div>

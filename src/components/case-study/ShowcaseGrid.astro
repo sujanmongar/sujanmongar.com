@@ -24,7 +24,7 @@ const panelClass: Record<Panel, string> = {
 ---
 
 <div class="full-bleed my-[20px] px-4 sm:px-8">
-  <div class:list={['showcase-panel overflow-hidden rounded-lg', panelClass[panel]]}>
+  <div class:list={['showcase-panel-grid overflow-hidden rounded-lg', panelClass[panel]]}>
     <div class="showcase-masonry [&>*:last-child]:mb-0">
       {
         items.map((item) => (
