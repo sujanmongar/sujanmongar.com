@@ -12,6 +12,7 @@ order: 2
 ---
 
 import FullImage from '../../../components/case-study/FullImage.astro';
+import ShowcaseGrid from '../../../components/case-study/ShowcaseGrid.astro';
 import BrandBand from '../../../components/case-study/BrandBand.astro';
 import homepageHero from './homepage-hero.webp';
 import searchAutocomplete from './search-autocomplete.webp';
@@ -50,17 +51,21 @@ higher conversions.
 
 <FullImage src={searchResults} alt="Search results grid with filters" />
 
-<FullImage src={cart} alt="Shopping cart with price summary" dark />
+<ShowcaseGrid
+  dark
+  logo={oneclickshopLogo}
+  logoAlt="OneClickShop"
+  items={[
+    { src: cart, alt: 'Shopping cart with price summary' },
+    { src: checkoutDelivery, alt: 'Checkout step one, delivery details' },
+    { src: checkoutPayment, alt: 'Checkout step two, payment method selection' },
+    { src: checkoutConfirm, alt: 'Checkout step three, order confirmation' }
+  ]}
+/>
 
-<FullImage src={checkoutDelivery} alt="Checkout step one, delivery details" />
+<FullImage src={signIn} alt="Sign in screen" />
 
-<FullImage src={checkoutPayment} alt="Checkout step two, payment method selection" dark />
-
-<FullImage src={checkoutConfirm} alt="Checkout step three, order confirmation" />
-
-<FullImage src={signIn} alt="Sign in screen" dark />
-
-<FullImage src={homepageFullMobile} alt="Full homepage on a narrow mobile viewport" />
+<FullImage src={homepageFullMobile} alt="Full homepage on a narrow mobile viewport" dark />
 
 <BrandBand logo={oneclickshopLogo} logoAlt="OneClickShop" dark={false} />
 

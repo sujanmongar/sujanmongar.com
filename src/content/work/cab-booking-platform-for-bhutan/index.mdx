@@ -12,6 +12,7 @@ order: 1
 ---
 
 import FullImage from '../../../components/case-study/FullImage.astro';
+import ShowcaseGrid from '../../../components/case-study/ShowcaseGrid.astro';
 import BrandBand from '../../../components/case-study/BrandBand.astro';
 import homepageMock from './homepage-mock.webp';
 import signinSignup from './mobile-signin-signup.webp';
@@ -42,19 +43,23 @@ rides, outstation trips, rentals, and custom routes with confidence and convenie
 
 <FullImage src={signinSignup} alt="Sign in and create account screens on mobile" dark />
 
-<FullImage src={webSearchList} alt="Search results with filters on desktop" />
+<ShowcaseGrid
+  dark
+  logo={drukdriveLogo}
+  logoAlt="DrukDrive"
+  items={[
+    { src: webSearchList, alt: 'Search results with filters on desktop' },
+    { src: otpVerification, alt: 'OTP verification screen before payment' },
+    { src: paymentMethod, alt: 'Payment method selection screen' },
+    { src: bookingReview, alt: 'Booking review and price summary screen' }
+  ]}
+/>
 
-<FullImage src={mobileSearchList} alt="Homepage and search results on mobile" dark />
+<FullImage src={mobileSearchList} alt="Homepage and search results on mobile" />
 
-<FullImage src={otpVerification} alt="OTP verification screen before payment" />
-
-<FullImage src={paymentMethod} alt="Payment method selection screen" dark />
+<FullImage src={profileDashboard} alt="Account dashboard with booking history" dark />
 
 <FullImage src={mobilePaymentSuccess} alt="Payment method and booking successful screens on mobile" />
-
-<FullImage src={bookingReview} alt="Booking review and price summary screen" dark />
-
-<FullImage src={profileDashboard} alt="Account dashboard with booking history" />
 
 <FullImage src={homepageFull} alt="Full homepage with recent searches, popular cars, and FAQs" dark />
 
