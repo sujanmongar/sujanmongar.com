@@ -30,17 +30,22 @@ const tag = coverTag ?? project.data.tags[0];
             {tag}
           </span>
         )}
-        {/* Aspect kept close to the artwork's own ratio, so it fills the
-            frame instead of floating in a lot of dead letterbox space */}
-        <div class="grid aspect-[3/2] place-items-center p-4 sm:p-5">
-          <Image
-            src={cover}
-            alt={coverAlt}
-            width={1000}
-            quality={92}
-            loading={priority ? 'eager' : 'lazy'}
-            class="h-auto w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-          />
+        {/* A fixed box (not sized off the image's own intrinsic height), so
+            every compact card is the same height regardless of the cover's
+            own aspect ratio — a tall phone-only composite no longer forces
+            its card taller than a wide laptop one. Generous padding keeps
+            the image sitting inside the frame rather than filling it. */}
+        <div class="relative aspect-[3/2]">
+          <div class="absolute inset-0 p-8 sm:p-10">
+            <Image
+              src={cover}
+              alt={coverAlt}
+              width={1000}
+              quality={92}
+              loading={priority ? 'eager' : 'lazy'}
+              class="h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+            />
+          </div>
         </div>
       </div>
 
