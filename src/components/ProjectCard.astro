@@ -4,41 +4,69 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   project: CollectionEntry<'work'>;
+  index: number;
   priority?: boolean;
 }
 
-const { project, priority = false } = Astro.props;
-const { title, summary, cover, coverAlt, tags, timeline } = project.data;
+const { project, index, priority = false } = Astro.props;
+const { title, summary, cover, coverAlt, tags, role, timeline } = project.data;
+
+// Alternate the panel tone so a list of projects has rhythm, and reuse the same
+// gradients the case studies use so the whole site reads as one thing.
+const panel = index % 2 === 0 ? 'showcase-dark' : 'showcase-grey';
 ---
 
 <a href={`/work/${project.id}/`} class="group block">
-  <div class="overflow-hidden rounded-xl bg-paper-dim">
+  <div class:list={['overflow-hidden rounded-2xl', panel]}>
     <Image
       src={cover}
       alt={coverAlt}
-      width={1200}
+      width={2000}
       quality={92}
       loading={priority ? 'eager' : 'lazy'}
-      class="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+      class="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
     />
   </div>
 
-  <div class="mt-6 flex items-baseline justify-between gap-6">
-    <h3
-      class="font-display text-2xl leading-tight font-medium italic transition-colors group-hover:text-accent sm:text-3xl"
-    >
-      {title}
-    </h3>
-    <span class="shrink-0 text-sm text-ink-soft">{timeline}</span>
+  <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-12 md:items-start md:gap-10">
+    <div class="md:col-span-7">
+      <h3
+        class="font-display text-3xl leading-tight font-medium transition-colors group-hover:text-accent sm:text-4xl lg:text-5xl"
+      >
+        {title}
+      </h3>
+      <p class="measure mt-4 text-lg leading-relaxed text-ink-soft">{summary}</p>
+    </div>
+
+    <div class="md:col-span-5 md:pt-2">
+      <dl class="flex flex-wrap gap-x-10 gap-y-4">
+        <div>
+          <dt class="text-xs tracking-[0.12em] text-ink-soft uppercase">Role</dt>
+          <dd class="mt-1.5 font-medium">{role}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.12em] text-ink-soft uppercase">Year</dt>
+          <dd class="mt-1.5 font-medium">{timeline}</dd>
+        </div>
+      </dl>
+
+      <ul class="mt-6 flex flex-wrap gap-2">
+        {
+          tags.slice(0, 3).map((tag) => (
+            <li class="rounded-full bg-paper-dim px-3.5 py-1.5 text-sm text-ink-soft">{tag}</li>
+          ))
+        }
+      </ul>
+
+      <span class="mt-7 inline-flex items-center gap-2 text-sm font-semibold">
+        View case study
+        <span
+          aria-hidden="true"
+          class="text-lg transition-transform duration-300 group-hover:translate-x-1.5"
+        >
+          →
+        </span>
+      </span>
+    </div>
   </div>
-
-  <p class="measure mt-3 text-ink-soft">{summary}</p>
-
-  <ul class="mt-5 flex flex-wrap gap-2">
-    {
-      tags.slice(0, 3).map((tag) => (
-        <li class="rounded-full bg-paper-dim px-3 py-1 text-xs font-medium text-ink-soft">{tag}</li>
-      ))
-    }
-  </ul>
 </a>

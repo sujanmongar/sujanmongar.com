@@ -28,7 +28,7 @@
    so content lines up consistently as you scroll and between pages. */
 .wrap {
   width: 100%;
-  max-width: 64rem;
+  max-width: 85rem;
   margin-inline: auto;
   padding-inline: 1.5rem;
 }
@@ -43,7 +43,15 @@
 
 /* Comfortable reading measure for body copy */
 .measure {
-  max-width: 38rem;
+  max-width: 42rem;
+}
+
+/* Narrower column for long-form reading inside the wide container */
+.wrap-read {
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
 }
 
 html {

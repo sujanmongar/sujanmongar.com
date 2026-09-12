@@ -18,7 +18,7 @@ const projects = (featured.length > 0 ? featured : work).slice(0, 4);
 >
   <Hero />
 
-  <section id="selected-work" class="section border-t border-line/70">
+  <section id="selected-work" class="section">
     <div class="wrap">
       <div class="flex items-baseline justify-between gap-6">
         <h2 class="font-display text-3xl font-medium sm:text-4xl">Selected work</h2>
@@ -30,8 +30,12 @@ const projects = (featured.length > 0 ? featured : work).slice(0, 4);
         </a>
       </div>
 
-      <div class="mt-12 grid grid-cols-1 gap-14 sm:mt-14 sm:grid-cols-2 sm:gap-x-10">
-        {projects.map((project, i) => <ProjectCard project={project} priority={i === 0} />)}
+      <div class="mt-14 space-y-24 sm:mt-16 sm:space-y-32">
+        {
+          projects.map((project, i) => (
+            <ProjectCard project={project} index={i} priority={i === 0} />
+          ))
+        }
       </div>
     </div>
   </section>
