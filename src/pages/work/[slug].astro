@@ -103,7 +103,7 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
   <nav class="border-t border-line/70 bg-paper px-6 py-16 sm:py-20" aria-label="More projects">
     <div
       class:list={[
-        'mx-auto grid max-w-6xl gap-10',
+        'mx-auto grid max-w-4xl gap-5',
         prevProject && nextProject ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:max-w-2xl'
       ]}
     >
@@ -114,21 +114,26 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
         ]
           .filter((entry) => entry.project)
           .map(({ project, label }) => (
-            <a href={`/work/${project!.id}/`} class="group block">
-              <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">{label}</p>
-              <div class="mt-5 overflow-hidden rounded-lg bg-paper-dim">
+            <a
+              href={`/work/${project!.id}/`}
+              class="group flex items-center gap-5 rounded-lg border border-line/70 p-4 transition-colors hover:border-ink/30"
+            >
+              <div class="w-28 shrink-0 overflow-hidden rounded bg-paper-dim sm:w-36">
                 <Image
                   src={project!.data.cover}
                   alt={project!.data.coverAlt}
-                  width={1200}
+                  width={400}
                   quality={92}
                   loading="lazy"
-                  class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                  class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </div>
-              <h2 class="font-display mt-5 text-2xl font-medium italic transition-colors group-hover:text-accent sm:text-3xl">
-                {project!.data.title}
-              </h2>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">{label}</p>
+                <h2 class="font-display mt-1 text-lg font-medium italic transition-colors group-hover:text-accent sm:text-xl">
+                  {project!.data.title}
+                </h2>
+              </div>
             </a>
           ))
       }

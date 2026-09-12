@@ -54,10 +54,27 @@ html {
   background: linear-gradient(90deg, #f9fafb, #e5e7eb, #f9fafb);
 }
 
+/* Images are trimmed of transparent margin, so all spacing is set here.
+   --showcase-pad is used for both the panel inset and the gap between
+   screens so the spacing reads evenly on all four sides. */
+:root {
+  --showcase-pad: 24px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --showcase-pad: 44px;
+  }
+}
+
+.showcase-panel {
+  padding: var(--showcase-pad);
+}
+
 /* Flat screens flow into two uneven columns, as on the original */
 .showcase-masonry {
   column-count: 1;
-  column-gap: 0;
+  column-gap: var(--showcase-pad);
 }
 
 @media (min-width: 768px) {
@@ -68,13 +85,24 @@ html {
 
 .showcase-masonry > * {
   break-inside: avoid;
-  margin-bottom: 0;
+  margin-bottom: var(--showcase-pad);
+}
+
+/* Text sections get room to breathe against the adjacent screens */
+.prose-case p + .full-bleed,
+.prose-case ul + .full-bleed {
+  margin-top: 5rem;
+}
+
+.prose-case .full-bleed + h2 {
+  margin-top: 5rem;
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-size: 18px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -97,9 +125,11 @@ body {
     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* transform:none (not translateY(0)) so the revealed section stops being a
+   containing block for fixed-position children */
 [data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
