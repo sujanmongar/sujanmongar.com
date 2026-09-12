@@ -1,74 +1,158 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import portrait from '../assets/sujan.webp';
 
 const experience = (await getCollection('experience')).sort((a, b) => b.data.order - a.data.order);
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+// Drawn from how Sujan describes his own practice, not invented
+const capabilities = [
+  {
+    title: 'UX audits',
+    body: 'Reviewing an existing product to find where structure, navigation, or trust break down.'
+  },
+  {
+    title: 'User research',
+    body: 'Understanding who the product is for and what actually gets in their way.'
+  },
+  {
+    title: 'Usability testing',
+    body: 'Putting flows in front of real people to check the design holds up before it ships.'
+  },
+  {
+    title: 'Wireframing',
+    body: 'Working out hierarchy and flow early, while changes are still cheap to make.'
+  },
+  {
+    title: 'High-fidelity UI',
+    body: 'Designing the finished interface as a system — components and states, not one screen.'
+  },
+  {
+    title: 'Design systems',
+    body: 'Keeping type, colour, and components consistent so a product can grow without drifting.'
+  }
+];
+
+const facts = [
+  { label: 'Focus', value: 'UX Flow, UI Systems, and Design Systems' },
+  { label: 'Strengths', value: 'Clarity, Consistency, and Delivery' },
+  { label: 'Available for', value: 'Full-time, Contract, and Freelance' }
+];
 ---
 
 <BaseLayout
   title="About"
   description="Sujan Mongar is a Bhutanese Product Designer (UX/UI) specialising in UX audits, user research, usability testing, wireframing, and high-fidelity UI design for web and mobile products."
 >
-  <section class="mx-auto max-w-3xl px-6 py-16">
-    <p class="text-xs font-semibold tracking-[0.2em] text-ink-soft uppercase">About</p>
-    <h1 class="font-display mt-4 text-5xl font-medium italic sm:text-6xl">Sujan Mongar</h1>
-    <p class="mt-2 text-lg text-ink-soft">Product Designer (UX/UI)</p>
+  <section class="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+    <p class="text-sm font-medium tracking-[0.15em] text-ink-soft uppercase">About</p>
 
-    <p class="mt-8 text-lg leading-relaxed text-ink-soft">
-      I am a Bhutanese Product Designer (UX/UI) specialising in UX audits, user research,
-      usability testing, wireframing, and high-fidelity UI design for web and mobile products. I
-      work with startups, growing businesses, and teams to improve user experience, increase
-      usability, and design scalable digital solutions. My approach is UX-first — focused on
-      clarity, structure, and meaningful product outcomes. Available for UX/UI roles, freelance
-      projects, and collaborations worldwide.
-    </p>
+    <div class="mt-8 grid grid-cols-1 gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-20">
+      <div>
+        <h1 class="font-display text-4xl font-medium italic sm:text-6xl">Sujan Mongar</h1>
+        <p class="mt-3 text-lg text-ink-soft">Product Designer (UX/UI)</p>
 
-    <div class="mt-8 flex flex-wrap gap-4 text-sm">
-      <span class="rounded-full bg-paper-dim px-4 py-2 font-medium">Thimphu, Bhutan</span>
-      <a
-        href="mailto:sujanallaymongar506@gmail.com"
-        class="rounded-full bg-paper-dim px-4 py-2 font-medium hover:text-accent"
-      >
-        sujanallaymongar506@gmail.com
-      </a>
-      <a href="tel:+61451716040" class="rounded-full bg-paper-dim px-4 py-2 font-medium hover:text-accent">
-        +61 451 716 040
-      </a>
+        <p class="mt-8 text-lg leading-relaxed">
+          I am a Bhutanese Product Designer (UX/UI) specialising in UX audits, user research,
+          usability testing, wireframing, and high-fidelity UI design for web and mobile products.
+          I work with startups, growing businesses, and teams to improve user experience, increase
+          usability, and design scalable digital solutions.
+        </p>
+        <p class="mt-5 text-lg leading-relaxed text-ink-soft">
+          My approach is UX-first — focused on clarity, structure, and meaningful product
+          outcomes. Available for UX/UI roles, freelance projects, and collaborations worldwide.
+        </p>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-accent"
+          >
+            Download resume
+          </a>
+          <a
+            href="/#get-in-touch"
+            class="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
+          >
+            Get in touch
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:pt-4">
+        <div class="overflow-hidden rounded-lg bg-paper-dim">
+          <Image
+            src={portrait}
+            alt="Sujan Mongar"
+            width={900}
+            quality={92}
+            loading="eager"
+            class="h-auto w-full"
+          />
+        </div>
+        <dl class="mt-8 space-y-5">
+          <div class="flex gap-4">
+            <dt class="w-24 shrink-0 text-sm text-ink-soft">Based in</dt>
+            <dd class="font-medium">Thimphu, Bhutan</dd>
+          </div>
+          <div class="flex gap-4">
+            <dt class="w-24 shrink-0 text-sm text-ink-soft">Email</dt>
+            <dd class="min-w-0 font-medium break-all">
+              <a href="mailto:sujanallaymongar506@gmail.com" class="hover:text-accent">
+                sujanallaymongar506@gmail.com
+              </a>
+            </dd>
+          </div>
+          <div class="flex gap-4">
+            <dt class="w-24 shrink-0 text-sm text-ink-soft">Phone</dt>
+            <dd class="font-medium">
+              <a href="tel:+61451716040" class="hover:text-accent">+61 451 716 040</a>
+            </dd>
+          </div>
+        </dl>
+      </div>
     </div>
 
-    <a
-      href="/resume.pdf"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="mt-8 inline-block rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-accent"
-    >
-      Download resume
-    </a>
+    <div class="mt-16 grid grid-cols-1 gap-8 border-y border-line/70 py-10 sm:grid-cols-3">
+      {
+        facts.map((fact) => (
+          <div>
+            <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">{fact.label}</p>
+            <p class="mt-2 font-medium">{fact.value}</p>
+          </div>
+        ))
+      }
+    </div>
 
-    <div class="mt-14 grid grid-cols-1 gap-8 border-y border-line/70 py-10 sm:grid-cols-3">
-      <div>
-        <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Focus</p>
-        <p class="mt-2 font-medium">UX Flow, UI Systems, and Design Systems</p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Strengths</p>
-        <p class="mt-2 font-medium">Clarity, Consistency, and Delivery</p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Available for</p>
-        <p class="mt-2 font-medium">Full-time, Contract, and Freelance</p>
+    <div class="mt-20">
+      <h2 class="font-display text-3xl font-semibold sm:text-4xl">What I do</h2>
+      <div class="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          capabilities.map((item) => (
+            <div class="border-t border-line/70 pt-5">
+              <h3 class="text-lg font-semibold">{item.title}</h3>
+              <p class="mt-2 text-ink-soft">{item.body}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
 
     {
       experience.length > 0 && (
-        <div class="mt-16">
-          <h2 class="font-display text-3xl font-semibold">Experience</h2>
-          <ol class="mt-8 space-y-8">
+        <div class="mt-20">
+          <h2 class="font-display text-3xl font-semibold sm:text-4xl">Experience</h2>
+          <ol class="mt-10 space-y-8">
             {experience.map((job) => (
               <li class="flex flex-col gap-1 border-b border-line/70 pb-8 last:border-0 sm:flex-row sm:justify-between">
                 <div>
-                  <p class="font-bold">{job.data.role}</p>
+                  <p class="font-semibold">{job.data.role}</p>
                   <p class="text-ink-soft">
                     {job.data.link ? (
                       <a href={job.data.link} target="_blank" rel="noopener noreferrer" class="hover:text-accent">
@@ -90,7 +174,39 @@ const experience = (await getCollection('experience')).sort((a, b) => b.data.ord
       )
     }
 
-    <p class="font-display mt-16 text-2xl font-medium italic">
+    {
+      work.length > 0 && (
+        <div class="mt-20">
+          <div class="flex items-end justify-between">
+            <h2 class="font-display text-3xl font-semibold sm:text-4xl">Recent work</h2>
+            <a href="/work/" class="text-sm font-semibold text-ink-soft transition-colors hover:text-accent">
+              View all works →
+            </a>
+          </div>
+          <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
+            {work.slice(0, 2).map((project) => (
+              <a href={`/work/${project.id}/`} class="group block">
+                <div class="overflow-hidden rounded-lg bg-paper-dim">
+                  <Image
+                    src={project.data.cover}
+                    alt={project.data.coverAlt}
+                    width={800}
+                    quality={92}
+                    loading="lazy"
+                    class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <h3 class="font-display mt-5 text-xl font-medium italic transition-colors group-hover:text-accent sm:text-2xl">
+                  {project.data.title}
+                </h3>
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    <p class="font-display mt-20 text-2xl font-medium italic sm:text-3xl">
       Designing with purpose, building with care.
     </p>
   </section>
