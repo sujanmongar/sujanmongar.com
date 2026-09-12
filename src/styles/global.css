@@ -3,17 +3,47 @@
 @import "@fontsource/manrope/500.css";
 @import "@fontsource/manrope/600.css";
 @import "@fontsource/manrope/700.css";
-@import "@fontsource/manrope/800.css";
+@import "@fontsource-variable/fraunces/wght-italic.css";
 
 @theme {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
 
-  --color-ink: #101014;
-  --color-ink-soft: #52525b;
-  --color-paper: #fafaf9;
-  --color-paper-dim: #f0efec;
-  --color-accent: #ff5a1f;
-  --color-line: #e4e2dd;
+  --color-ink: #121210;
+  --color-ink-soft: #6b675f;
+  --color-paper: #faf8f4;
+  --color-paper-dim: #f0ece3;
+  --color-accent: #e8542a;
+  --color-accent-soft: #fce6dc;
+  --color-line: #dedad0;
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root:not([data-theme="light"]) {
+  @media (prefers-color-scheme: dark) {
+    --color-ink: #f3f1ea;
+    --color-ink-soft: #a29c8d;
+    --color-paper: #100f0d;
+    --color-paper-dim: #191713;
+    --color-accent: #ff7a45;
+    --color-accent-soft: #2c1b12;
+    --color-line: rgba(255, 255, 255, 0.12);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-ink: #f3f1ea;
+  --color-ink-soft: #a29c8d;
+  --color-paper: #100f0d;
+  --color-paper-dim: #191713;
+  --color-accent: #ff7a45;
+  --color-accent-soft: #2c1b12;
+  --color-line: rgba(255, 255, 255, 0.12);
+  color-scheme: dark;
 }
 
 html {
@@ -25,6 +55,9 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 ::selection {
@@ -32,27 +65,58 @@ body {
   color: white;
 }
 
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "ss01" 1;
+}
+
+/* Scroll reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .prose-case p {
-  margin-bottom: 1.25em;
-  line-height: 1.7;
+  margin-bottom: 1.4em;
+  line-height: 1.75;
   color: var(--color-ink-soft);
+  font-size: 1.125rem;
 }
 
 .prose-case h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-top: 2.5em;
-  margin-bottom: 0.75em;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  font-style: italic;
+  margin-top: 2.75em;
+  margin-bottom: 0.6em;
   color: var(--color-ink);
 }
 
 .prose-case ul {
-  margin-bottom: 1.25em;
+  margin-bottom: 1.4em;
   padding-left: 1.25em;
   list-style: disc;
   color: var(--color-ink-soft);
+  font-size: 1.125rem;
 }
 
 .prose-case li {
-  margin-bottom: 0.4em;
+  margin-bottom: 0.5em;
 }

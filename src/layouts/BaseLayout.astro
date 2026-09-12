@@ -21,8 +21,18 @@ const { title, description, image, type } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#fafaf9" />
+    <meta name="theme-color" content="#faf8f4" />
     <Seo title={title} description={description} image={image} type={type} />
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'dark' || stored === 'light') {
+            document.documentElement.dataset.theme = stored;
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -47,5 +57,20 @@ const { title, description, image, type } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <script>
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15 }
+      );
+
+      document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+    </script>
   </body>
 </html>

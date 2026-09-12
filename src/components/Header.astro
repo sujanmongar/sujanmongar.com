@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+
 const navItems = [
   { href: '/work/', label: 'Work' },
   { href: '/about/', label: 'About' }
@@ -6,35 +8,50 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 border-b border-line/70 bg-paper/80 backdrop-blur-md">
-  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href="/" class="text-sm font-extrabold tracking-[0.2em] uppercase">
-      Sujan
+<header class="sticky top-0 z-50 border-b border-line/70 bg-paper/85 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href="/" class="font-display text-lg font-semibold italic">
+      Sujan Mongar
     </a>
-    <nav class="flex items-center gap-6 text-sm font-medium">
-      {
-        navItems.map((item) => {
-          const active =
-            item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
-          return (
-            <a
-              href={item.href}
-              class:list={[
-                'transition-colors hover:text-accent',
-                active ? 'text-ink' : 'text-ink-soft'
-              ]}
-            >
-              {item.label}
-            </a>
-          );
-        })
-      }
+    <nav class="flex items-center gap-3 text-sm font-medium sm:gap-6">
+      <div class="hidden items-center gap-6 sm:flex">
+        {
+          navItems.map((item) => {
+            const active =
+              item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
+            return (
+              <a
+                href={item.href}
+                class:list={[
+                  'transition-colors hover:text-accent',
+                  active ? 'text-ink' : 'text-ink-soft'
+                ]}
+              >
+                {item.label}
+              </a>
+            );
+          })
+        }
+      </div>
       <a
         href="/#get-in-touch"
         class="rounded-full bg-ink px-4 py-2 text-xs font-semibold text-paper transition-colors hover:bg-accent"
       >
         Get in touch
       </a>
+      <ThemeToggle />
     </nav>
   </div>
+  <nav class="flex items-center gap-5 border-t border-line/70 px-6 py-2.5 text-sm font-medium sm:hidden">
+    {
+      navItems.map((item) => {
+        const active = item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
+        return (
+          <a href={item.href} class:list={['transition-colors', active ? 'text-ink' : 'text-ink-soft']}>
+            {item.label}
+          </a>
+        );
+      })
+    }
+  </nav>
 </header>

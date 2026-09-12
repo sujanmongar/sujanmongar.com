@@ -1,0 +1,90 @@
+---
+import { getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  projects: CollectionEntry<'work'>[];
+}
+
+const { projects } = Astro.props;
+
+const rows = await Promise.all(
+  projects.map(async (project, i) => {
+    const optimized = await getImage({ src: project.data.cover, width: 640, height: 480 });
+    return { project, index: i, previewSrc: optimized.src };
+  })
+);
+---
+
+<div class="work-list" id="work-list">
+  {
+    rows.map(({ project, index, previewSrc }) => (
+      <a
+        href={`/work/${project.id}/`}
+        class="work-row group flex flex-col gap-2 border-b border-line/70 py-8 transition-colors first:border-t hover:border-ink/30 sm:flex-row sm:items-center sm:gap-8 sm:py-10"
+        data-image={previewSrc}
+      >
+        <span class="font-mono text-xs text-ink-soft/70 sm:w-10">{`0${index + 1}`}</span>
+        <h3 class="font-display flex-1 text-3xl font-medium italic transition-colors group-hover:text-accent sm:text-4xl md:text-5xl">
+          {project.data.title}
+        </h3>
+        <ul class="hidden shrink-0 gap-2 sm:flex sm:max-w-xs sm:flex-wrap sm:justify-end">
+          {project.data.tags.slice(0, 2).map((tag) => (
+            <li class="rounded-full bg-paper-dim px-3 py-1 text-xs font-medium text-ink-soft">
+              {tag}
+            </li>
+          ))}
+        </ul>
+        <span
+          aria-hidden="true"
+          class="shrink-0 text-2xl text-ink-soft transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent"
+        >
+          →
+        </span>
+      </a>
+    ))
+  }
+
+  <div
+    id="hover-preview"
+    class="pointer-events-none fixed top-0 left-0 z-40 aspect-[4/3] w-64 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl opacity-0 shadow-2xl transition-opacity duration-200 sm:w-80"
+  >
+    <img id="hover-preview-img" alt="" class="h-full w-full object-cover" />
+  </div>
+</div>
+
+<script>
+  const list = document.getElementById('work-list');
+  const preview = document.getElementById('hover-preview');
+  const previewImg = document.getElementById('hover-preview-img') as HTMLImageElement | null;
+
+  if (list && preview && previewImg && window.matchMedia('(hover: hover)').matches) {
+    let raf = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    function move(e: MouseEvent) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          preview!.style.transform = `translate(${targetX}px, ${targetY}px) translate(-50%, -50%)`;
+          raf = 0;
+        });
+      }
+    }
+
+    list.addEventListener('mousemove', move);
+
+    list.querySelectorAll<HTMLAnchorElement>('.work-row').forEach((row) => {
+      row.addEventListener('mouseenter', () => {
+        const src = row.dataset.image;
+        if (src) previewImg!.src = src;
+        preview!.style.opacity = '1';
+      });
+      row.addEventListener('mouseleave', () => {
+        preview!.style.opacity = '0';
+      });
+    });
+  }
+</script>

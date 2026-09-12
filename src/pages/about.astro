@@ -11,8 +11,8 @@ const experience = (await getCollection('experience')).sort((a, b) => b.data.ord
 >
   <section class="mx-auto max-w-3xl px-6 py-16">
     <p class="text-xs font-semibold tracking-[0.2em] text-ink-soft uppercase">About</p>
-    <h1 class="mt-4 text-3xl font-extrabold sm:text-4xl">Sujan Mongar</h1>
-    <p class="mt-1 text-lg text-ink-soft">Product Designer (UX/UI)</p>
+    <h1 class="font-display mt-4 text-5xl font-medium italic sm:text-6xl">Sujan Mongar</h1>
+    <p class="mt-2 text-lg text-ink-soft">Product Designer (UX/UI)</p>
 
     <p class="mt-8 text-lg leading-relaxed text-ink-soft">
       I am a Bhutanese Product Designer (UX/UI) specialising in UX audits, user research,
@@ -63,7 +63,7 @@ const experience = (await getCollection('experience')).sort((a, b) => b.data.ord
     {
       experience.length > 0 && (
         <div class="mt-16">
-          <h2 class="text-2xl font-bold">Experience</h2>
+          <h2 class="font-display text-3xl font-medium italic">Experience</h2>
           <ol class="mt-8 space-y-8">
             {experience.map((job) => (
               <li class="flex flex-col gap-1 border-b border-line/70 pb-8 last:border-0 sm:flex-row sm:justify-between">
@@ -90,6 +90,8 @@ const experience = (await getCollection('experience')).sort((a, b) => b.data.ord
       )
     }
 
-    <p class="mt-16 text-xl font-medium italic">Designing with purpose, building with care.</p>
+    <p class="font-display mt-16 text-2xl font-medium italic">
+      Designing with purpose, building with care.
+    </p>
   </section>
 </BaseLayout>

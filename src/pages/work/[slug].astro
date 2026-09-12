@@ -2,7 +2,6 @@
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work', ({ data }) => !data.draft);
@@ -17,14 +16,20 @@ const { Content } = await render(entry);
 const { title, summary, cover, coverAlt, role, timeline, deliverables, client, link, figma, tags } =
   entry.data;
 
-const allWork = await getCollection('work', ({ data }) => !data.draft);
-const otherProjects = allWork.filter((p) => p.id !== entry.id).slice(0, 2);
+const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const currentIndex = allWork.findIndex((p) => p.id === entry.id);
+const nextProject = allWork[(currentIndex + 1) % allWork.length];
 ---
 
 <BaseLayout title={title} description={summary} image={cover.src} type="article">
   <article>
-    <header class="mx-auto max-w-3xl px-6 pt-16">
-      <ul class="flex flex-wrap gap-2">
+    <header class="mx-auto max-w-3xl px-6 pt-16 sm:pt-20">
+      <a href="/work/" class="text-sm font-semibold text-ink-soft transition-colors hover:text-accent">
+        ← All work
+      </a>
+      <ul class="mt-6 flex flex-wrap gap-2">
         {
           tags.map((tag) => (
             <li class="rounded-full bg-paper-dim px-3 py-1 text-xs font-semibold text-ink-soft uppercase tracking-wide">
@@ -33,8 +38,10 @@ const otherProjects = allWork.filter((p) => p.id !== entry.id).slice(0, 2);
           ))
         }
       </ul>
-      <h1 class="mt-6 text-4xl font-extrabold sm:text-5xl">{title}</h1>
-      <p class="mt-4 text-lg text-ink-soft">{summary}</p>
+      <h1 class="font-display mt-6 text-4xl leading-[1.05] font-medium italic sm:text-6xl">
+        {title}
+      </h1>
+      <p class="mt-6 text-lg text-ink-soft">{summary}</p>
 
       <dl class="mt-10 grid grid-cols-2 gap-6 border-y border-line/70 py-8 sm:grid-cols-4">
         <div>
@@ -87,7 +94,7 @@ const otherProjects = allWork.filter((p) => p.id !== entry.id).slice(0, 2);
       }
     </header>
 
-    <div class="mx-auto mt-12 max-w-3xl px-6">
+    <div class="mx-auto mt-12 max-w-4xl px-6" data-reveal>
       <Image
         src={cover}
         alt={coverAlt}
@@ -99,23 +106,26 @@ const otherProjects = allWork.filter((p) => p.id !== entry.id).slice(0, 2);
       />
     </div>
 
-    <div class="prose-case mx-auto max-w-3xl px-6 py-16">
+    <div class="prose-case mx-auto max-w-3xl px-6 py-16 sm:py-20">
       <Content />
     </div>
   </article>
 
-  {
-    otherProjects.length > 0 && (
-      <section class="border-t border-line/70 bg-paper-dim py-20">
-        <div class="mx-auto max-w-5xl px-6">
-          <h2 class="text-2xl font-bold">More projects</h2>
-          <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
-            {otherProjects.map((project) => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
+  <a
+    href={`/work/${nextProject.id}/`}
+    class="group block border-t border-line/70 bg-paper-dim px-6 py-16 transition-colors hover:bg-accent-soft sm:py-24"
+  >
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">Next project</p>
+      <h2 class="font-display mt-4 text-4xl font-medium italic transition-colors group-hover:text-accent sm:text-6xl">
+        {nextProject.data.title}
+      </h2>
+      <span
+        aria-hidden="true"
+        class="mt-6 inline-block text-2xl text-ink-soft transition-transform duration-300 group-hover:translate-x-2 group-hover:text-accent"
+      >
+        →
+      </span>
+    </div>
+  </a>
 </BaseLayout>
