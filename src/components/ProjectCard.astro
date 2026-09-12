@@ -40,7 +40,7 @@ const tag = coverTag ?? project.data.tags[0];
             the image sitting inside the frame rather than filling it. A
             wide (spanning) card gets a wider frame to match. */}
         <div class:list={['relative aspect-[3/2]', wide && 'sm:aspect-[21/9]']}>
-          <div class="absolute inset-0 p-8 sm:p-10">
+          <div class="absolute inset-0 p-[8%]">
             <Image
               src={cover}
               alt={coverAlt}
@@ -69,7 +69,7 @@ const tag = coverTag ?? project.data.tags[0];
     <a href={`/work/${project.id}/`} class="group block" {...(!priority ? { 'data-reveal': true } : {})}>
       {/* One large frame — the work itself is the whole card */}
       <div class="wrap">
-        <div class:list={['relative overflow-hidden rounded-[28px]', panel]}>
+        <div class:list={['relative overflow-hidden rounded-2xl', panel]}>
           {/* Read at a glance, before scrolling to the caption below */}
           {tag && (
             <span class="absolute top-6 left-6 z-10 rounded-full bg-paper/90 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-ink backdrop-blur-sm sm:top-10 sm:left-10">
@@ -82,7 +82,7 @@ const tag = coverTag ?? project.data.tags[0];
               padding shrinks the image without inflating the panel's own
               height the way padding on an auto-height box would. */}
           <div class="relative aspect-[3/2]">
-            <div class="absolute inset-0 p-[6%] sm:p-[9%]">
+            <div class="absolute inset-0 p-[8%]">
               <Image
                 src={cover}
                 alt={coverAlt}

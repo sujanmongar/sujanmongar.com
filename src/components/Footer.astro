@@ -31,6 +31,9 @@ const accessKey =
           Have a product idea or need to improve your user experience? Let's discuss how we can
           build something clear, scalable, and impactful.
         </p>
+        <p class="font-display mt-6 text-xl italic text-ink-soft">
+          Designing with purpose, <span class="text-accent not-italic">building with care.</span>
+        </p>
         <div class="mt-8 flex flex-wrap gap-3">
           {
             links.map((link) => (
@@ -62,7 +65,7 @@ const accessKey =
               type="text"
               required
               placeholder="Your name"
-              class="mt-2 w-full rounded-lg border border-ink/15 bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
+              class="mt-2 w-full rounded-lg border border-ink/15 bg-paper px-4 py-3 text-base text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
             />
             <p data-error-for="name" class="mt-2 hidden text-sm text-danger"></p>
           </div>
@@ -76,7 +79,7 @@ const accessKey =
               type="email"
               required
               placeholder="you@studio.com"
-              class="mt-2 w-full rounded-lg border border-ink/15 bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
+              class="mt-2 w-full rounded-lg border border-ink/15 bg-paper px-4 py-3 text-base text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
             />
             <p data-error-for="email" class="mt-2 hidden text-sm text-danger"></p>
           </div>
@@ -91,7 +94,7 @@ const accessKey =
             required
             rows="4"
             placeholder="What are you building, and when do you need it?"
-            class="mt-2 w-full resize-none rounded-lg border border-ink/15 bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
+            class="mt-2 w-full resize-none rounded-lg border border-ink/15 bg-paper px-4 py-3 text-base text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
           ></textarea>
           <p data-error-for="message" class="mt-2 hidden text-sm text-danger"></p>
         </div>
