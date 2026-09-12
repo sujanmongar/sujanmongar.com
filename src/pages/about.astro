@@ -82,9 +82,9 @@ const description =
   />
 
   <section class="wrap pt-12 pb-[clamp(3rem,7vw,5rem)] sm:pt-16">
-    <p class="text-sm tracking-[0.18em] text-ink-soft uppercase">About</p>
+    <p class="hero-in hero-in-1 text-sm tracking-[0.18em] text-ink-soft uppercase">About</p>
     <h1
-      class="font-display mt-6 text-[clamp(2.5rem,6.4vw,5.5rem)] leading-[1.04] font-medium tracking-[-0.02em] sm:mt-8"
+      class="hero-in hero-in-2 font-display mt-6 text-[clamp(2.5rem,6.4vw,5.5rem)] leading-[1.04] font-medium tracking-[-0.02em] sm:mt-8"
     >
       Sujan Mongar,<br />
       <span class="text-ink-soft">Product Designer (UX/UI)</span>
@@ -92,7 +92,7 @@ const description =
   </section>
 
   {/* Portrait and the statement sit side by side on desktop, stacked on mobile */}
-  <section class="wrap grid grid-cols-1 gap-10 pb-[clamp(3rem,7vw,5rem)] lg:grid-cols-12 lg:gap-16">
+  <section class="wrap grid grid-cols-1 gap-10 pb-[clamp(3rem,7vw,5rem)] lg:grid-cols-12 lg:gap-16" data-reveal>
     <div class="lg:col-span-5">
       <Image
         src={portrait}
@@ -155,7 +155,7 @@ const description =
   </section>
 
   {/* Facts read as one quiet panel rather than three bordered boxes */}
-  <section class="wrap pb-[clamp(3rem,7vw,5rem)]">
+  <section class="wrap pb-[clamp(3rem,7vw,5rem)]" data-reveal>
     <dl class="grid grid-cols-1 gap-8 rounded-2xl bg-paper-dim p-8 sm:grid-cols-3 sm:gap-10 sm:p-10">
       {
         facts.map((fact) => (
@@ -170,11 +170,11 @@ const description =
 
   <section class="section">
     <div class="wrap">
-      <h2 class="font-display text-3xl font-medium sm:text-4xl">What I do</h2>
-      <div class="mt-12 grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      <h2 class="font-display text-3xl font-medium sm:text-4xl" data-reveal>What I do</h2>
+      <div class="stagger mt-12 grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {
           capabilities.map((item, i) => (
-            <div class="border-t border-line pt-5">
+            <div class="border-t border-line pt-5" data-reveal>
               <span class="font-display text-2xl font-medium text-accent">
                 {String(i + 1).padStart(2, '0')}
               </span>
@@ -190,10 +190,13 @@ const description =
   {
     experience.length > 0 && (
       <section class="wrap pb-[clamp(4rem,9vw,7rem)]">
-        <h2 class="font-display text-3xl font-medium sm:text-4xl">Experience</h2>
-        <ol class="mt-12 space-y-8">
+        <h2 class="font-display text-3xl font-medium sm:text-4xl" data-reveal>Experience</h2>
+        <ol class="stagger mt-12 space-y-8">
           {experience.map((job) => (
-            <li class="flex flex-col gap-1 border-b border-line pb-8 last:border-0 sm:flex-row sm:justify-between sm:gap-8">
+            <li
+              class="flex flex-col gap-1 border-b border-line pb-8 last:border-0 sm:flex-row sm:justify-between sm:gap-8"
+              data-reveal
+            >
               <div>
                 <p class="text-xl font-medium">{job.data.role}</p>
                 <p class="mt-1 text-ink-soft">
@@ -222,7 +225,7 @@ const description =
     )
   }
 
-  <section class="wrap pb-[clamp(4rem,9vw,7rem)]">
+  <section class="wrap pb-[clamp(4rem,9vw,7rem)]" data-reveal>
     <p class="font-display text-[clamp(1.9rem,4.4vw,3.25rem)] leading-[1.15] font-medium tracking-[-0.01em]">
       Designing with purpose, <span class="text-accent">building with care.</span>
     </p>

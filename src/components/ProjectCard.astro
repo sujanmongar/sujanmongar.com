@@ -24,7 +24,7 @@ const tag = coverTag ?? project.data.tags[0];
 {
   size === 'compact' ? (
     <a href={`/work/${project.id}/`} class="group block" data-reveal>
-      <div class:list={['relative overflow-hidden rounded-2xl shadow-lg shadow-ink/10', panel]}>
+      <div class:list={['relative overflow-hidden rounded-2xl shadow-lg shadow-ink/10 transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-ink/20', panel]}>
         {tag && (
           <span class="absolute top-4 left-4 z-10 rounded-full bg-paper/90 px-3 py-1 text-[11px] font-semibold tracking-wide text-ink backdrop-blur-sm">
             {tag}
@@ -39,7 +39,7 @@ const tag = coverTag ?? project.data.tags[0];
             width={1000}
             quality={92}
             loading={priority ? 'eager' : 'lazy'}
-            class="h-auto w-full object-contain"
+            class="h-auto w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
           />
         </div>
       </div>
@@ -62,7 +62,7 @@ const tag = coverTag ?? project.data.tags[0];
       <div class="wrap">
         <div
           class:list={[
-            'relative overflow-hidden rounded-[28px] px-6 py-6 shadow-xl shadow-ink/10 sm:px-10 sm:py-8',
+            'relative overflow-hidden rounded-[28px] px-6 py-6 shadow-xl shadow-ink/10 transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-ink/20 sm:px-10 sm:py-8',
             panel
           ]}
         >
@@ -79,7 +79,7 @@ const tag = coverTag ?? project.data.tags[0];
             width={2000}
             quality={92}
             loading={priority ? 'eager' : 'lazy'}
-            class="h-auto w-full"
+            class="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
           />
         </div>
       </div>

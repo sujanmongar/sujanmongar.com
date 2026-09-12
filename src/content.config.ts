@@ -11,6 +11,10 @@ const work = defineCollection({
     z.object({
       title: z.string(),
       summary: z.string(),
+      // The fuller description shown under the title on the case study
+      // page itself. Kept separate from `summary` (which drives cards and
+      // meta tags) so the two don't end up saying the same sentence twice.
+      overview: z.string(),
       cover: image(),
       coverAlt: z.string(),
       // Optional short label shown over the cover itself, so the work reads
