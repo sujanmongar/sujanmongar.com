@@ -69,12 +69,7 @@ const tag = coverTag ?? project.data.tags[0];
     <a href={`/work/${project.id}/`} class="group block" {...(!priority ? { 'data-reveal': true } : {})}>
       {/* One large frame — the work itself is the whole card */}
       <div class="wrap">
-        <div
-          class:list={[
-            'relative overflow-hidden rounded-[28px] px-6 py-6 sm:px-10 sm:py-8',
-            panel
-          ]}
-        >
+        <div class:list={['relative overflow-hidden rounded-[28px]', panel]}>
           {/* Read at a glance, before scrolling to the caption below */}
           {tag && (
             <span class="absolute top-6 left-6 z-10 rounded-full bg-paper/90 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-ink backdrop-blur-sm sm:top-10 sm:left-10">
@@ -82,14 +77,22 @@ const tag = coverTag ?? project.data.tags[0];
             </span>
           )}
 
-          <Image
-            src={cover}
-            alt={coverAlt}
-            width={2000}
-            quality={92}
-            loading={priority ? 'eager' : 'lazy'}
-            class="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-          />
+          {/* A fixed aspect ratio (matching the trimmed cover closely, so
+              there's barely any letterboxing from the ratio itself) means
+              padding shrinks the image without inflating the panel's own
+              height the way padding on an auto-height box would. */}
+          <div class="relative aspect-[3/2]">
+            <div class="absolute inset-0 p-[6%] sm:p-[9%]">
+              <Image
+                src={cover}
+                alt={coverAlt}
+                width={2000}
+                quality={92}
+                loading={priority ? 'eager' : 'lazy'}
+                class="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
