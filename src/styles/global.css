@@ -33,6 +33,14 @@ html {
   margin-left: calc(50% - 50vw);
 }
 
+.showcase-dark {
+  background: radial-gradient(130% 150% at 50% -20%, #2c2a24 0%, #100f0d 65%);
+}
+
+.showcase-grey {
+  background: radial-gradient(130% 150% at 50% -20%, #f5f2ea 0%, #e7e2d5 100%);
+}
+
 body {
   background: var(--color-paper);
   color: var(--color-ink);

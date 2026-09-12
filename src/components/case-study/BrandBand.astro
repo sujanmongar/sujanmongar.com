@@ -19,9 +19,8 @@ const { text, logo, logoAlt, dark = true } = Astro.props;
         src={logo}
         alt={logoAlt ?? ''}
         width={480}
-        height={160}
         quality={100}
-        class="mx-auto w-auto max-w-xs object-contain"
+        class="mx-auto h-auto w-full max-w-xs"
       />
     ) : (
       <p
