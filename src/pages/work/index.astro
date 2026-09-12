@@ -24,21 +24,35 @@ const filters = [...tagCounts.entries()]
   title="Work"
   description="UX/UI case studies by Sujan Mongar — research, audits, and high-fidelity design for web and mobile products."
 >
-  <section class="mx-auto max-w-6xl px-6 py-16 sm:py-20">
-    <p class="text-sm font-medium tracking-[0.15em] text-ink-soft uppercase">Selected work</p>
-    <h1 class="font-display mt-4 text-4xl font-medium italic sm:text-6xl">Work I'm proud of</h1>
-    <p class="mt-6 max-w-lg text-ink-soft">
-      Case studies from product design engagements — research, UX audits, and high-fidelity UI
-      across web and mobile.
-    </p>
+  <section class="mx-auto max-w-7xl px-6 pt-16 pb-10 sm:pt-24">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      <p class="text-sm font-medium tracking-[0.15em] text-ink-soft uppercase lg:col-span-3">
+        Selected work
+      </p>
+      <div class="lg:col-span-9">
+        <h1 class="font-display text-5xl leading-[1.05] font-medium sm:text-7xl">
+          Work I'm <em class="text-accent not-italic">proud</em> of
+        </h1>
+        <p class="mt-8 max-w-xl text-lg text-ink-soft">
+          Case studies from product design engagements — research, UX audits, and high-fidelity UI
+          across web and mobile.
+        </p>
+      </div>
+    </div>
 
     {
       filters.length > 1 && (
-        <div class="mt-10 flex flex-wrap gap-2" id="work-filters">
+        <div
+          class="mt-14 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line/70 pt-6"
+          id="work-filters"
+        >
+          <span class="text-xs font-semibold tracking-[0.15em] text-ink-soft/70 uppercase">
+            Filter
+          </span>
           <button
             type="button"
             data-filter="all"
-            class="filter-chip rounded-full border border-ink px-4 py-2 text-sm font-semibold transition-colors"
+            class="filter-chip text-sm font-semibold text-ink underline decoration-accent decoration-2 underline-offset-8"
             aria-pressed="true"
           >
             All work
@@ -47,7 +61,7 @@ const filters = [...tagCounts.entries()]
             <button
               type="button"
               data-filter={tag}
-              class="filter-chip rounded-full border border-ink/15 px-4 py-2 text-sm font-semibold text-ink-soft transition-colors hover:border-ink/40"
+              class="filter-chip text-sm font-semibold text-ink-soft underline decoration-transparent decoration-2 underline-offset-8 transition-colors hover:text-ink"
               aria-pressed="false"
             >
               {tag}
@@ -56,42 +70,66 @@ const filters = [...tagCounts.entries()]
         </div>
       )
     }
+  </section>
 
-    <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2" id="work-grid">
+  <section class="mx-auto max-w-7xl px-6 pb-24">
+    <div id="work-grid">
       {
-        work.map((project) => (
+        work.map((project, i) => (
           <a
             href={`/work/${project.id}/`}
-            class="work-card group block"
+            class="work-card group grid grid-cols-1 items-center gap-8 border-t border-line/70 py-12 lg:grid-cols-12 lg:gap-16 lg:py-20"
             data-tags={project.data.tags.join('|')}
           >
-            <div class="overflow-hidden rounded-lg bg-paper-dim">
+            <div
+              class:list={[
+                'overflow-hidden rounded-xl bg-paper-dim lg:col-span-7',
+                i % 2 === 1 && 'lg:order-2'
+              ]}
+            >
               <Image
                 src={project.data.cover}
                 alt={project.data.coverAlt}
-                width={1000}
+                width={1400}
                 quality={92}
-                loading="lazy"
-                class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                class="h-auto w-full transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </div>
-            <h2 class="font-display mt-6 text-2xl font-medium italic transition-colors group-hover:text-accent sm:text-3xl">
-              {project.data.title}
-            </h2>
-            <p class="mt-3 text-ink-soft">{project.data.summary}</p>
-            <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-soft">
-              <span>{project.data.role}</span>
-              <span aria-hidden="true">·</span>
-              <span>{project.data.timeline}</span>
+
+            <div class:list={['lg:col-span-5', i % 2 === 1 && 'lg:order-1']}>
+              <span class="font-mono text-xs text-ink-soft/70">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h2 class="font-display mt-4 text-3xl leading-tight font-medium italic transition-colors group-hover:text-accent sm:text-5xl">
+                {project.data.title}
+              </h2>
+              <p class="mt-5 max-w-md text-ink-soft">{project.data.summary}</p>
+
+              <ul class="mt-6 flex flex-wrap gap-2">
+                {project.data.tags.slice(0, 3).map((tag) => (
+                  <li class="rounded-full bg-paper-dim px-3 py-1 text-xs font-medium text-ink-soft">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-8 flex items-center gap-3 text-sm font-semibold">
+                <span class="transition-colors group-hover:text-accent">Read case study</span>
+                <span
+                  aria-hidden="true"
+                  class="text-xl transition-transform duration-300 group-hover:translate-x-1.5 group-hover:text-accent"
+                >
+                  →
+                </span>
+              </div>
             </div>
           </a>
         ))
       }
     </div>
 
-    <p class="mt-12 hidden text-ink-soft" id="work-empty">
-      Nothing in that category yet.
-    </p>
+    <p class="hidden py-16 text-ink-soft" id="work-empty">Nothing in that category yet.</p>
   </section>
 </BaseLayout>
 
@@ -100,9 +138,6 @@ const filters = [...tagCounts.entries()]
   const cards = document.querySelectorAll<HTMLAnchorElement>('.work-card');
   const empty = document.getElementById('work-empty');
 
-  const active = ['border-ink', 'text-ink'];
-  const idle = ['border-ink/15', 'text-ink-soft', 'hover:border-ink/40'];
-
   chips.forEach((chip) => {
     chip.addEventListener('click', () => {
       const filter = chip.dataset.filter ?? 'all';
@@ -110,8 +145,10 @@ const filters = [...tagCounts.entries()]
       chips.forEach((other) => {
         const on = other === chip;
         other.setAttribute('aria-pressed', String(on));
-        other.classList.remove(...(on ? idle : active));
-        other.classList.add(...(on ? active : idle));
+        other.classList.toggle('text-ink', on);
+        other.classList.toggle('decoration-accent', on);
+        other.classList.toggle('text-ink-soft', !on);
+        other.classList.toggle('decoration-transparent', !on);
       });
 
       let shown = 0;
