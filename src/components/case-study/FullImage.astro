@@ -24,7 +24,7 @@ const panelClass: Record<Panel, string> = {
 ---
 
 <div class="full-bleed my-[20px] px-4 sm:px-8">
-  <div class:list={['overflow-hidden rounded-lg', panel !== 'plain' && 'showcase-panel', panelClass[panel]]}>
+  <div class:list={['overflow-hidden rounded-lg', panelClass[panel]]}>
     <Image src={src} alt={alt} width={2800} quality={92} loading="lazy" class="h-auto w-full" />
   </div>
 </div>

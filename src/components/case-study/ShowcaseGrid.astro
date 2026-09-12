@@ -10,32 +10,44 @@ interface GridItem {
 }
 
 interface Props {
-  items: GridItem[];
+  /** Screens for the left column, top to bottom */
+  left: GridItem[];
+  /** Screens for the right column, top to bottom */
+  right: GridItem[];
   panel?: Panel;
 }
 
-const { items, panel = 'dark' } = Astro.props;
+const { left, right, panel = 'dark' } = Astro.props;
 
 const panelClass: Record<Panel, string> = {
   dark: 'showcase-dark',
   light: 'showcase-grey',
   mist: 'showcase-mist'
 };
+
+const columns = [left, right];
 ---
 
+{/* Columns are wider than half the panel and pushed to the outer edges so they
+    overlap slightly in the middle. Each screen carries its own transparent
+    margin, which is what sets the spacing — the same mechanism as the original. */}
 <div class="full-bleed my-[20px] px-4 sm:px-8">
-  <div class:list={['showcase-panel-grid overflow-hidden rounded-lg', panelClass[panel]]}>
-    <div class="showcase-masonry [&>*:last-child]:mb-0">
+  <div class:list={['overflow-hidden rounded-lg', panelClass[panel]]}>
+    <div class="flex flex-col md:flex-row">
       {
-        items.map((item) => (
-          <Image
-            src={item.src}
-            alt={item.alt}
-            width={1600}
-            quality={92}
-            loading="lazy"
-            class="h-auto w-full"
-          />
+        columns.map((column, i) => (
+          <div class:list={['md:w-[52.3%] md:shrink-0', i === 1 && 'md:-ml-[4.6%]']}>
+            {column.map((item) => (
+              <Image
+                src={item.src}
+                alt={item.alt}
+                width={1600}
+                quality={92}
+                loading="lazy"
+                class="h-auto w-full"
+              />
+            ))}
+          </div>
         ))
       }
     </div>

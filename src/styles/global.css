@@ -54,34 +54,8 @@ html {
   background: linear-gradient(90deg, #f9fafb, #e5e7eb, #f9fafb);
 }
 
-/* Images are trimmed of their transparent margin, so spacing is set here.
-   A single screen keeps the roomy inset it had before; a grid of screens
-   uses the same value for its inset and the gap between screens, so the
-   space between them no longer reads as double the edge. */
-.showcase-panel {
-  padding: clamp(20px, 6%, 96px);
-}
-
-.showcase-panel-grid {
-  padding: clamp(16px, 3%, 48px);
-}
-
-/* Flat screens flow into two uneven columns, as on the original */
-.showcase-masonry {
-  column-count: 1;
-  column-gap: clamp(16px, 3%, 48px);
-}
-
-@media (min-width: 768px) {
-  .showcase-masonry {
-    column-count: 2;
-  }
-}
-
-.showcase-masonry > * {
-  break-inside: avoid;
-  margin-bottom: clamp(16px, 3%, 48px);
-}
+/* Panels carry no padding: each screen's own transparent margin provides the
+   inset, which is how the original portfolio spaces these. */
 
 /* Text sections get clear room above and below, so they read as their own
    block rather than crowding the screens on either side */

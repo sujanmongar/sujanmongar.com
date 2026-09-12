@@ -8,8 +8,10 @@ const links = [
 ];
 const year = new Date().getFullYear();
 
-// Set PUBLIC_WEB3FORMS_KEY in the Cloudflare project to enable delivery
-const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+// Web3Forms access keys are public by design — they ship in the client bundle
+// and only allow submitting this form. Override via PUBLIC_WEB3FORMS_KEY if needed.
+const accessKey =
+  import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '2645fe17-70af-4457-95a1-257378f53880';
 ---
 
 <footer id="get-in-touch" class="border-t border-line/70 bg-paper-dim">

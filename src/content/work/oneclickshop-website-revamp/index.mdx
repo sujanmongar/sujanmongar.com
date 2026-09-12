@@ -38,10 +38,8 @@ leading to low engagement and poor conversion performance.
 
 <ShowcaseGrid
   panel="dark"
-  items={[
-    { src: homepageFullMobile, alt: 'Full homepage on a narrow mobile viewport' },
-    { src: productDetailMobile, alt: 'Product detail page on a narrow mobile viewport' }
-  ]}
+  left={[{ src: homepageFullMobile, alt: 'Full homepage on a narrow mobile viewport' }]}
+  right={[{ src: productDetailMobile, alt: 'Product detail page on a narrow mobile viewport' }]}
 />
 
 <OverlapPair
@@ -55,10 +53,8 @@ leading to low engagement and poor conversion performance.
 
 <ShowcaseGrid
   panel="mist"
-  items={[
-    { src: checkoutDelivery, alt: 'Checkout step one, delivery details' },
-    { src: checkoutConfirm, alt: 'Checkout step three, order confirmation' }
-  ]}
+  left={[{ src: checkoutDelivery, alt: 'Checkout step one, delivery details' }]}
+  right={[{ src: checkoutConfirm, alt: 'Checkout step three, order confirmation' }]}
 />
 
 ## What I did
@@ -71,8 +67,8 @@ higher conversions.
 
 <ShowcaseGrid
   panel="dark"
-  items={[
-    { src: searchResults, alt: 'Search results grid with filters' },
+  left={[{ src: searchResults, alt: 'Search results grid with filters' }]}
+  right={[
     { src: cart, alt: 'Shopping cart with price summary' },
     { src: checkoutPayment, alt: 'Checkout step two, payment method selection' }
   ]}
