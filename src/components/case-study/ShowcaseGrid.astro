@@ -5,48 +5,45 @@ import type { ImageMetadata } from 'astro:assets';
 interface GridItem {
   src: ImageMetadata;
   alt: string;
-  span?: 1 | 2;
 }
 
 interface Props {
   items: GridItem[];
-  dark?: boolean;
+  panel?: 'dark' | 'light';
   logo?: ImageMetadata;
   logoAlt?: string;
 }
 
-const { items, dark = false, logo, logoAlt } = Astro.props;
+const { items, panel = 'dark', logo, logoAlt } = Astro.props;
+const panelClass = panel === 'dark' ? 'showcase-dark' : 'showcase-grey';
 ---
 
-<div class="full-bleed my-8 px-4 sm:px-6">
-  <div class:list={['rounded-3xl p-5 sm:p-10', dark ? 'showcase-dark' : 'showcase-grey']}>
-    <div class="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 sm:gap-8">
+<div class="full-bleed my-6 px-4 sm:px-8">
+  <div class:list={['overflow-hidden rounded-lg', panelClass]}>
+    <div class="showcase-masonry">
       {
         items.map((item) => (
-          <div class:list={[item.span === 2 && 'sm:col-span-2']}>
-            <Image
-              src={item.src}
-              alt={item.alt}
-              width={1400}
-              quality={100}
-              loading="lazy"
-              class="h-auto w-full rounded-xl"
-            />
-          </div>
+          <Image
+            src={item.src}
+            alt={item.alt}
+            width={1600}
+            quality={92}
+            loading="lazy"
+            class="h-auto w-full"
+          />
         ))
       }
     </div>
     {
       logo && (
-        <div class="mt-12 sm:mt-16">
-          <Image
-            src={logo}
-            alt={logoAlt ?? ''}
-            width={900}
-            quality={100}
-            class="mx-auto h-auto w-full max-w-md"
-          />
-        </div>
+        <Image
+          src={logo}
+          alt={logoAlt ?? ''}
+          width={1600}
+          quality={92}
+          loading="lazy"
+          class="h-auto w-full"
+        />
       )
     }
   </div>

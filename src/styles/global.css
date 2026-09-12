@@ -33,12 +33,34 @@ html {
   margin-left: calc(50% - 50vw);
 }
 
+/* Gradients and radius match the original portfolio's case study panels */
 .showcase-dark {
-  background: radial-gradient(100% 100% at 22% 0%, #4a4a4a 0%, #262626 42%, #0f0f0f 100%);
+  background: linear-gradient(90deg, #343434, #535050, #1f1e1e);
+}
+
+.showcase-dark-v {
+  background: linear-gradient(180deg, #343434, #535050, #1f1e1e);
 }
 
 .showcase-grey {
-  background: radial-gradient(100% 100% at 22% 0%, #ffffff 0%, #f7f7f7 45%, #ebebeb 100%);
+  background: linear-gradient(90deg, #e5e5e5, #ffffff, #dddddd);
+}
+
+/* Flat screens flow into two uneven columns, as on the original */
+.showcase-masonry {
+  column-count: 1;
+  column-gap: 0;
+}
+
+@media (min-width: 768px) {
+  .showcase-masonry {
+    column-count: 2;
+  }
+}
+
+.showcase-masonry > * {
+  break-inside: avoid;
+  margin-bottom: 0;
 }
 
 body {
