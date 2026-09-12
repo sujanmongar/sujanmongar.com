@@ -1,6 +1,4 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
-
 const navItems = [
   { href: '/work/', label: 'Work' },
   { href: '/about/', label: 'About' }
@@ -39,7 +37,6 @@ const currentPath = Astro.url.pathname;
       >
         Get in touch
       </a>
-      <ThemeToggle />
     </nav>
   </div>
   <nav class="flex items-center gap-5 border-t border-line/70 px-6 py-2.5 text-sm font-medium sm:hidden">

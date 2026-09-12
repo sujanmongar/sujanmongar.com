@@ -63,7 +63,7 @@ const experience = (await getCollection('experience')).sort((a, b) => b.data.ord
     {
       experience.length > 0 && (
         <div class="mt-16">
-          <h2 class="font-display text-3xl font-medium italic">Experience</h2>
+          <h2 class="font-display text-3xl font-semibold">Experience</h2>
           <ol class="mt-8 space-y-8">
             {experience.map((job) => (
               <li class="flex flex-col gap-1 border-b border-line/70 pb-8 last:border-0 sm:flex-row sm:justify-between">

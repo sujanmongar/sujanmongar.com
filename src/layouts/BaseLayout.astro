@@ -23,16 +23,6 @@ const { title, description, image, type } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#faf8f4" />
     <Seo title={title} description={description} image={image} type={type} />
-    <script is:inline>
-      (function () {
-        try {
-          var stored = localStorage.getItem('theme');
-          if (stored === 'dark' || stored === 'light') {
-            document.documentElement.dataset.theme = stored;
-          }
-        } catch (e) {}
-      })();
-    </script>
     <script
       type="application/ld+json"
       set:html={JSON.stringify({

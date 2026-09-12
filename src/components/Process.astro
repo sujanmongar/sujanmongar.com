@@ -1,0 +1,48 @@
+---
+import SectionKicker from './SectionKicker.astro';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Understand',
+    body: 'A short call to learn the product, the users, and what "done" looks like. No brief is too rough.'
+  },
+  {
+    n: '02',
+    title: 'Explore',
+    body: 'Research, audits, and quick wireframes to find the right structure before any pixel gets polished.'
+  },
+  {
+    n: '03',
+    title: 'Design',
+    body: 'High-fidelity UI, built as a system — components and states, not just one pretty screen.'
+  },
+  {
+    n: '04',
+    title: 'Hand off',
+    body: 'Clean Figma files, specs, and prototypes your team (or mine) can build from without guessing.'
+  }
+];
+---
+
+<section class="mx-auto max-w-6xl px-6 py-16 sm:py-24" data-reveal>
+  <SectionKicker label="How I work" />
+  <h2 class="font-display mt-4 max-w-xl text-4xl font-semibold sm:text-5xl">
+    A simple process, built for momentum.
+  </h2>
+  <p class="mt-4 max-w-md text-ink-soft">
+    No lengthy discovery decks. Just a clear path from problem to shippable design.
+  </p>
+
+  <ol class="mt-14 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      steps.map((step) => (
+        <li class="border-t border-line/70 pt-6">
+          <span class="font-display text-sm text-accent italic">{step.n}</span>
+          <h3 class="mt-3 text-xl font-semibold">{step.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-soft">{step.body}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

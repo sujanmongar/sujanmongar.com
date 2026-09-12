@@ -21,11 +21,17 @@ const rows = await Promise.all(
     rows.map(({ project, index, previewSrc }) => (
       <a
         href={`/work/${project.id}/`}
-        class="work-row group flex flex-col gap-2 border-b border-line/70 py-8 transition-colors first:border-t hover:border-ink/30 sm:flex-row sm:items-center sm:gap-8 sm:py-10"
+        class="work-row group flex items-center gap-4 border-b border-line/70 py-6 transition-colors first:border-t hover:border-ink/30 sm:gap-8 sm:py-10"
         data-image={previewSrc}
       >
         <span class="font-mono text-xs text-ink-soft/70 sm:w-10">{`0${index + 1}`}</span>
-        <h3 class="font-display flex-1 text-3xl font-medium italic transition-colors group-hover:text-accent sm:text-4xl md:text-5xl">
+        <img
+          src={previewSrc}
+          alt=""
+          loading="lazy"
+          class="size-16 shrink-0 rounded-lg object-cover sm:hidden"
+        />
+        <h3 class="font-display flex-1 text-2xl font-semibold italic transition-colors group-hover:text-accent sm:text-4xl md:text-5xl">
           {project.data.title}
         </h3>
         <ul class="hidden shrink-0 gap-2 sm:flex sm:max-w-xs sm:flex-wrap sm:justify-end">

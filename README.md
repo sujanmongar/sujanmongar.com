@@ -1,43 +1,52 @@
-# Astro Starter Kit: Minimal
+# sujanmongar.com
 
-```sh
-npm create astro@latest -- --template minimal
+The portfolio of **Sujan Mongar** — a Product Designer (UX/UI) based in Thimphu, Bhutan.
+
+Live at [sujanmongar.com](https://sujanmongar.com) — case studies, process, and a direct line to reach out.
+
+## Built for speed
+
+No CMS, no database, no bloated builder — just static HTML shipped from the edge.
+
+- **[Astro](https://astro.build)** — static output, near-zero client-side JavaScript
+- **Tailwind CSS v4** — CSS-first theming, light/dark mode via CSS variables
+- **Content Collections** — every case study is a type-checked MDX file with its own images, colocated in `src/content/work/`
+- **Fraunces + Outfit** — self-hosted variable fonts, no external font requests
+- **Cloudflare Workers (Static Assets)** — deployed straight from `main` on every push
+
+## Adding a new case study
+
+Each project lives in its own folder — copy an existing one as a starting point:
+
+```
+src/content/work/<project-slug>/
+  index.mdx       ← frontmatter (title, tags, role, timeline…) + the case study body
+  cover.webp       ← cover image, referenced from frontmatter
+  *.webp           ← any other images used inside the case study
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The case study body is MDX, so each project can use a different layout — mix and match the
+building blocks in `src/components/case-study/` (`FullImage`, `ImageGrid`, `StatRow`, `Quote`),
+or write something fully custom. No config changes needed; a new folder is a new page.
 
-## 🚀 Project Structure
+## Local development
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
+npm run dev       # localhost:4321
+npm run build     # outputs to ./dist
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Structure
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```
+src/
+├── components/       shared UI (header, footer, work list, case-study blocks)
+├── content/
+│   ├── work/          case studies (MDX + images)
+│   ├── experience/     work history (About page timeline)
+│   └── testimonials/   client quotes
+├── layouts/           BaseLayout (SEO, theme, header/footer shell)
+├── pages/             routes — index, /work, /work/[slug], /about
+└── styles/            design tokens + global styles
+```
