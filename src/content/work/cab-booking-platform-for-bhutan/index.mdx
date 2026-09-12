@@ -11,43 +11,60 @@ featured: true
 order: 1
 ---
 
-import FullImage from '../../../components/case-study/FullImage.astro';
-import ShowcaseGrid from '../../../components/case-study/ShowcaseGrid.astro';
-import OverlapPair from '../../../components/case-study/OverlapPair.astro';
-import homepageMock from './homepage-mock.webp';
-import mobileSearchList from './mobile-search-list.webp';
-import homepageFull from './web-homepage-full.webp';
-import bookingReview from './web-booking-review.webp';
-import webSearchList from './web-search-list.webp';
-import paymentMethod from './web-payment-method.webp';
-import otpVerification from './web-otp-verification.webp';
-import laptopHomepage from './laptop-homepage.webp';
-import profileDashboard from './web-profile-dashboard.webp';
-import signinSignup from './mobile-signin-signup.webp';
-import webProfile from './web-profile.webp';
-import mobilePaymentSuccess from './mobile-payment-success.webp';
-import drukdriveLogo from './drukdrive-logo.webp';
+import FullImage from "../../../components/case-study/FullImage.astro";
+import ShowcaseGrid from "../../../components/case-study/ShowcaseGrid.astro";
+import OverlapPair from "../../../components/case-study/OverlapPair.astro";
+import homepageMock from "./homepage-mock.webp";
+import mobileSearchList from "./mobile-search-list.webp";
+import homepageFull from "./web-homepage-full.webp";
+import bookingReview from "./web-booking-review.webp";
+import webSearchList from "./web-search-list.webp";
+import paymentMethod from "./web-payment-method.webp";
+import otpVerification from "./web-otp-verification.webp";
+import laptopHomepage from "./laptop-homepage.webp";
+import profileDashboard from "./web-profile-dashboard.webp";
+import signinSignup from "./mobile-signin-signup.webp";
+import webProfile from "./web-profile.webp";
+import mobilePaymentSuccess from "./mobile-payment-success.webp";
+import drukdriveLogo from "./drukdrive-logo.webp";
 
-<FullImage src={homepageMock} alt="Homepage on web and mobile, showing the ride search form" />
+<FullImage
+  src={homepageMock}
+  alt="Homepage on web and mobile, showing the ride search form"
+/>
 
-## Problem
+## Overview
+
+DrukDrive is a cab-booking platform for Bhutan, designed for tourists, locals and long-distance
+travellers. It brings local rides, outstation trips, rentals and custom routes into a single
+mobile-responsive product, covering the full journey from search through to payment and booking
+confirmation.
+
+## The challenge
 
 Bhutan lacks an open and reliable cab-booking system. People still depend on manual calls or
 emails to find a ride, with limited providers, low vehicle availability, and very few car types.
 This makes booking slow, uncertain, and inconvenient for both tourists and local users.
 
-<FullImage src={mobileSearchList} alt="Homepage and search results on mobile" panel="dark-v" />
+<FullImage
+  src={mobileSearchList}
+  alt="Homepage and search results on mobile"
+  panel="dark-v"
+/>
 
 <ShowcaseGrid
   panel="dark"
   left={[
-    { src: homepageFull, alt: 'Full homepage with recent searches, popular cars, and FAQs' },
-    { src: bookingReview, alt: 'Booking review and price summary screen' }
+    {
+      src: homepageFull,
+      alt: "Full homepage with recent searches, popular cars, and FAQs",
+    },
+    { src: bookingReview, alt: "Booking review and price summary screen" },
   ]}
   right={[
-    { src: webSearchList, alt: 'Search results with filters on desktop' },
-    { src: paymentMethod, alt: 'Payment method selection screen' },
-    { src: otpVerification, alt: 'OTP verification screen before payment' }
+    { src: webSearchList, alt: "Search results with filters on desktop" },
+    { src: paymentMethod, alt: "Payment method selection screen" },
+    { src: otpVerification, alt: "OTP verification screen before payment" },
   ]}
 />
 
@@ -58,22 +75,37 @@ This makes booking slow, uncertain, and inconvenient for both tourists and local
   rightAlt="Account dashboard with booking history on desktop"
 />
 
-## What I did
+## The approach
 
 I designed a complete cab-booking platform that brings all travel needs into one simple,
 trustworthy system. The solution includes clear booking flows, transparent pricing, verified
 drivers, multiple vehicle options, and a mobile-first interface. Users can easily book local
 rides, outstation trips, rentals, and custom routes with confidence and convenience.
 
-<FullImage src={signinSignup} alt="Sign in and create account screens on mobile" panel="light" />
+<FullImage
+  src={signinSignup}
+  alt="Sign in and create account screens on mobile"
+  panel="light"
+/>
 
-<FullImage src={webProfile} alt="Account dashboard with booking history" panel="dark" />
+<FullImage
+  src={webProfile}
+  alt="Account dashboard with booking history"
+  panel="dark"
+/>
 
-<FullImage src={mobilePaymentSuccess} alt="Payment method and booking successful screens on mobile" />
+<FullImage
+  src={mobilePaymentSuccess}
+  alt="Payment method and booking successful screens on mobile"
+/>
 
 <FullImage src={drukdriveLogo} alt="DrukDrive" panel="dark" />
 
-## Approach
+## The outcome
+
+A complete, mobile-responsive design covering the full booking journey — search and filtering,
+vehicle comparison, account creation, OTP verification, payment and confirmation — delivered as a
+consistent UI system rather than a set of isolated screens.
 
 - Mapped the existing manual booking journey (phone calls, messaging apps) to find where trust and
   clarity broke down.

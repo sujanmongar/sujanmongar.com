@@ -11,15 +11,16 @@ interface Props {
 const { project, index, priority = false } = Astro.props;
 const { title, summary, cover, coverAlt, tags, role, timeline } = project.data;
 
-// Alternating tone, reusing the case study panel gradients so the whole site
-// speaks one language.
-const panel = index % 2 === 0 ? 'showcase-dark' : 'showcase-grey';
+// Alternating tone and side, reusing the case study panel gradients so the
+// whole site speaks one language.
+const flipped = index % 2 === 1;
+const panel = flipped ? 'showcase-grey' : 'showcase-dark';
 const number = String(index + 1).padStart(2, '0');
 ---
 
 <a href={`/work/${project.id}/`} class="group block">
-  {/* Title row sits above the panel so the work itself stays the hero */}
-  <div class="wrap flex flex-wrap items-end justify-between gap-x-10 gap-y-4 pb-6">
+  {/* Title row spans the full width so the work reads as a headline */}
+  <div class="wrap flex flex-wrap items-end justify-between gap-x-10 gap-y-4 pb-8">
     <div class="flex items-baseline gap-5">
       <span class="font-mono text-sm text-accent">{number}</span>
       <h3
@@ -31,34 +32,37 @@ const number = String(index + 1).padStart(2, '0');
     <span class="text-sm text-ink-soft">{timeline}</span>
   </div>
 
-  <div class:list={['full-bleed overflow-hidden', panel]}>
-    <Image
-      src={cover}
-      alt={coverAlt}
-      width={2400}
-      quality={92}
-      loading={priority ? 'eager' : 'lazy'}
-      class="mx-auto h-auto w-full max-w-[1600px] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-    />
-  </div>
-
-  <div class="wrap grid grid-cols-1 gap-6 pt-7 md:grid-cols-12 md:gap-10">
-    <p class="measure text-lg leading-relaxed text-ink-soft md:col-span-7">{summary}</p>
-
-    <div class="md:col-span-5 md:flex md:items-start md:justify-between md:gap-8">
-      <div>
-        <p class="text-xs tracking-[0.14em] text-ink-soft uppercase">Role</p>
-        <p class="mt-2 font-medium">{role}</p>
-        <ul class="mt-5 flex flex-wrap gap-2">
-          {
-            tags.slice(0, 3).map((tag) => (
-              <li class="rounded-full bg-paper-dim px-3.5 py-1.5 text-sm text-ink-soft">{tag}</li>
-            ))
-          }
-        </ul>
+  {/* Cover and details share the row, so the screen stays generous without
+      taking over the whole page */}
+  <div class="wrap grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-14">
+    <div class:list={['lg:col-span-8', flipped && 'lg:order-2']}>
+      <div class:list={['overflow-hidden rounded-2xl p-5 sm:p-8', panel]}>
+        <Image
+          src={cover}
+          alt={coverAlt}
+          width={1700}
+          quality={92}
+          loading={priority ? 'eager' : 'lazy'}
+          class="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+        />
       </div>
+    </div>
 
-      <span class="mt-6 inline-flex shrink-0 items-center gap-2 text-sm font-semibold md:mt-1">
+    <div class:list={['lg:col-span-4', flipped && 'lg:order-1']}>
+      <p class="text-lg leading-relaxed text-ink-soft">{summary}</p>
+
+      <p class="mt-8 text-xs tracking-[0.14em] text-ink-soft uppercase">Role</p>
+      <p class="mt-2 font-medium">{role}</p>
+
+      <ul class="mt-6 flex flex-wrap gap-2">
+        {
+          tags.slice(0, 3).map((tag) => (
+            <li class="rounded-full bg-paper-dim px-3.5 py-1.5 text-sm text-ink-soft">{tag}</li>
+          ))
+        }
+      </ul>
+
+      <span class="mt-8 inline-flex items-center gap-2 text-sm font-semibold">
         View case study
         <span
           aria-hidden="true"

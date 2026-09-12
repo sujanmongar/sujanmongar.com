@@ -25,6 +25,59 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
 ---
 
 <BaseLayout title={title} description={summary} image={cover.src} type="article">
+  {/* Case study structured data, so search engines can read this as a work
+      sample with a clear author, subject and imagery */}
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: title,
+      headline: title,
+      description: summary,
+      image: new URL(cover.src, Astro.site).href,
+      url: new URL(Astro.url.pathname, Astro.site).href,
+      keywords: tags.join(', '),
+      inLanguage: 'en',
+      author: {
+        '@type': 'Person',
+        name: 'Sujan Mongar',
+        jobTitle: 'Product Designer (UX/UI)',
+        url: 'https://sujanmongar.com'
+      },
+      creator: { '@type': 'Person', name: 'Sujan Mongar' },
+      about: deliverables.join(', '),
+      ...(client ? { sourceOrganization: { '@type': 'Organization', name: client } } : {})
+    })}
+  />
+
+  <nav aria-label="Breadcrumb" class="sr-only">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/work/">Work</a></li>
+      <li aria-current="page">{title}</li>
+    </ol>
+  </nav>
+
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://sujanmongar.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Work', item: 'https://sujanmongar.com/work/' },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: title,
+          item: new URL(Astro.url.pathname, Astro.site).href
+        }
+      ]
+    })}
+  />
   <article>
     <header class="wrap pt-16 sm:pt-20">
       <a href="/work/" class="text-sm font-semibold text-ink-soft transition-colors hover:text-accent">

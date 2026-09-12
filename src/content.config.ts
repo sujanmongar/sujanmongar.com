@@ -1,11 +1,11 @@
-import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const work = defineCollection({
   loader: glob({
-    pattern: '**/index.mdx',
-    base: './src/content/work',
-    generateId: ({ entry }) => entry.replace(/\/index\.mdx$/, '')
+    pattern: "**/index.mdx",
+    base: "./src/content/work",
+    generateId: ({ entry }) => entry.replace(/\/index\.mdx$/, ""),
   }),
   schema: ({ image }) =>
     z.object({
@@ -22,12 +22,12 @@ const work = defineCollection({
       figma: z.string().url().optional(),
       featured: z.boolean().default(false),
       order: z.number().default(0),
-      draft: z.boolean().default(false)
-    })
+      draft: z.boolean().default(false),
+    }),
 });
 
 const experience = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/experience' }),
+  loader: glob({ pattern: "**/*.md", base: "./src/content/experience" }),
   schema: z.object({
     company: z.string(),
     role: z.string(),
@@ -35,20 +35,8 @@ const experience = defineCollection({
     startDate: z.string(),
     endDate: z.string().optional(), // omit or "Present"
     link: z.string().url().optional(),
-    order: z.number().default(0)
-  })
+    order: z.number().default(0),
+  }),
 });
 
-const testimonials = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/testimonials' }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      role: z.string(),
-      company: z.string().optional(),
-      avatar: image().optional(),
-      order: z.number().default(0)
-    })
-});
-
-export const collections = { work, experience, testimonials };
+export const collections = { work, experience };

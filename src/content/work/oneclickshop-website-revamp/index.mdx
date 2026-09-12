@@ -11,26 +11,36 @@ featured: true
 order: 2
 ---
 
-import FullImage from '../../../components/case-study/FullImage.astro';
-import ShowcaseGrid from '../../../components/case-study/ShowcaseGrid.astro';
-import OverlapPair from '../../../components/case-study/OverlapPair.astro';
-import homepageHero from './homepage-hero.webp';
-import homepageFullMobile from './homepage-full-mobile.webp';
-import productDetailMobile from './product-detail-mobile.webp';
-import searchClicked from './search-clicked.webp';
-import searchTyping from './search-typing.webp';
-import cartPopup from './cart-popup.webp';
-import checkoutDelivery from './checkout-delivery.webp';
-import checkoutConfirm from './checkout-confirm.webp';
-import searchResults from './search-results.webp';
-import cart from './cart.webp';
-import checkoutPayment from './checkout-payment.webp';
-import signIn from './sign-in.webp';
-import oneclickshopLogo from './oneclickshop-logo.webp';
+import FullImage from "../../../components/case-study/FullImage.astro";
+import ShowcaseGrid from "../../../components/case-study/ShowcaseGrid.astro";
+import OverlapPair from "../../../components/case-study/OverlapPair.astro";
+import homepageHero from "./homepage-hero.webp";
+import homepageFullMobile from "./homepage-full-mobile.webp";
+import productDetailMobile from "./product-detail-mobile.webp";
+import searchClicked from "./search-clicked.webp";
+import searchTyping from "./search-typing.webp";
+import cartPopup from "./cart-popup.webp";
+import checkoutDelivery from "./checkout-delivery.webp";
+import checkoutConfirm from "./checkout-confirm.webp";
+import searchResults from "./search-results.webp";
+import cart from "./cart.webp";
+import checkoutPayment from "./checkout-payment.webp";
+import signIn from "./sign-in.webp";
+import oneclickshopLogo from "./oneclickshop-logo.webp";
 
-<FullImage src={homepageHero} alt="OneClickShop homepage with best-selling products and restaurant partners" />
+<FullImage
+  src={homepageHero}
+  alt="OneClickShop homepage with best-selling products and restaurant partners"
+/>
 
-## Problem
+## Overview
+
+OneClickShop is an online grocery and home-delivery service in Thimphu, Bhutan, selling everyday
+products alongside food from local restaurant and vendor partners. This was a full redesign of the
+e-commerce experience, from browsing and search through to cart and checkout, on both desktop and
+mobile.
+
+## The challenge
 
 The existing OneClickShop website lacked a clear structure, consistent branding, and a smooth
 shopping experience. Users struggled with navigation, product discovery, and checkout flow,
@@ -38,8 +48,18 @@ leading to low engagement and poor conversion performance.
 
 <ShowcaseGrid
   panel="dark"
-  left={[{ src: homepageFullMobile, alt: 'Full homepage on a narrow mobile viewport' }]}
-  right={[{ src: productDetailMobile, alt: 'Product detail page on a narrow mobile viewport' }]}
+  left={[
+    {
+      src: homepageFullMobile,
+      alt: "Full homepage on a narrow mobile viewport",
+    },
+  ]}
+  right={[
+    {
+      src: productDetailMobile,
+      alt: "Product detail page on a narrow mobile viewport",
+    },
+  ]}
 />
 
 <OverlapPair
@@ -49,28 +69,35 @@ leading to low engagement and poor conversion performance.
   rightAlt="Search bar with live autocomplete suggestions"
 />
 
-<FullImage src={cartPopup} alt="Cart flyout shown from a product page" panel="dark-d" />
+<FullImage
+  src={cartPopup}
+  alt="Cart flyout shown from a product page"
+  panel="dark-d"
+/>
 
 <ShowcaseGrid
   panel="mist"
-  left={[{ src: checkoutDelivery, alt: 'Checkout step one, delivery details' }]}
-  right={[{ src: checkoutConfirm, alt: 'Checkout step three, order confirmation' }]}
+  left={[{ src: checkoutDelivery, alt: "Checkout step one, delivery details" }]}
+  right={[
+    { src: checkoutConfirm, alt: "Checkout step three, order confirmation" },
+  ]}
 />
 
-## What I did
+## The approach
 
 I redesigned the entire OneClickShop website with a cleaner layout, improved product hierarchy,
 and a more intuitive shopping journey. The revamp includes modern UI elements, simplified
-navigation, stronger visual branding, and a mobile-first responsive design. The result is a
-faster, clearer, and more user-friendly e-commerce experience that supports better browsing and
-higher conversions.
+navigation, stronger visual branding, and a mobile-first responsive design.
 
 <ShowcaseGrid
   panel="dark"
-  left={[{ src: searchResults, alt: 'Search results grid with filters' }]}
+  left={[{ src: searchResults, alt: "Search results grid with filters" }]}
   right={[
-    { src: cart, alt: 'Shopping cart with price summary' },
-    { src: checkoutPayment, alt: 'Checkout step two, payment method selection' }
+    { src: cart, alt: "Shopping cart with price summary" },
+    {
+      src: checkoutPayment,
+      alt: "Checkout step two, payment method selection",
+    },
   ]}
 />
 
@@ -78,7 +105,11 @@ higher conversions.
 
 <FullImage src={oneclickshopLogo} alt="OneClickShop" panel="dark-v" />
 
-## Approach
+## The outcome
+
+A faster, clearer and more user-friendly e-commerce experience that supports better browsing and
+higher conversions — covering search and autocomplete, filtered results, product detail, cart and
+a three-step checkout, all responsive down to mobile.
 
 - Audited the existing site to find where navigation and product discovery broke down.
 - Rebuilt the information hierarchy around product categories and search, not just visual style.
