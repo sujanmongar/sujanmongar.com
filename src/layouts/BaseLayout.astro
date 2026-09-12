@@ -47,6 +47,32 @@ const { title, description, image, type } = Astro.props;
       <slot />
     </main>
     <Footer />
+
+    {/* Persistent contact CTA, freed from the header — fades out once the
+        real contact section (footer) comes into view so it never overlaps it.
+        A compact icon on mobile so it never sits over nearby links; the full
+        labelled pill once there is room for it. */}
+    <a
+      href="/#get-in-touch"
+      id="floating-contact"
+      aria-label="Get in touch"
+      class="fixed right-4 bottom-4 z-40 inline-flex size-12 items-center justify-center gap-2 rounded-full bg-ink text-paper shadow-lg shadow-ink/20 transition-all duration-300 hover:bg-accent sm:right-6 sm:bottom-6 sm:size-auto sm:px-5 sm:py-3"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-5 sm:hidden"
+        aria-hidden="true"
+      >
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" />
+      </svg>
+      <span class="hidden text-sm font-semibold sm:inline">Get in touch</span>
+    </a>
+
     <script>
       const revealObserver = new IntersectionObserver(
         (entries) => {
@@ -61,6 +87,20 @@ const { title, description, image, type } = Astro.props;
       );
 
       document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+
+      const floatingContact = document.getElementById('floating-contact');
+      const contactSection = document.getElementById('get-in-touch');
+
+      if (floatingContact && contactSection) {
+        const contactObserver = new IntersectionObserver(
+          ([entry]) => {
+            floatingContact.classList.toggle('opacity-0', entry.isIntersecting);
+            floatingContact.classList.toggle('pointer-events-none', entry.isIntersecting);
+          },
+          { threshold: 0.1 }
+        );
+        contactObserver.observe(contactSection);
+      }
     </script>
   </body>
 </html>

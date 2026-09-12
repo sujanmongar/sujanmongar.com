@@ -19,18 +19,27 @@ const projects = (featured.length > 0 ? featured : work).slice(0, 4);
   <Hero />
 
   <section id="selected-work" class="section">
-    <div class="wrap flex items-baseline justify-between gap-6 pb-14 sm:pb-16">
+    <div class="wrap pb-14 sm:pb-16">
       <h2 class="font-display text-3xl font-medium sm:text-4xl">Work I'm proud of</h2>
-      <a
-        href="/work/"
-        class="shrink-0 text-sm font-semibold text-ink-soft transition-colors hover:text-accent"
-      >
-        View all works →
-      </a>
     </div>
 
     <div class="space-y-24 sm:space-y-32">
       {projects.map((project, i) => <ProjectCard project={project} index={i} priority={i === 0} />)}
+    </div>
+
+    <div class="wrap mt-20 flex justify-center sm:mt-24">
+      <a
+        href="/work/"
+        class="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-7 py-3.5 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
+      >
+        View all works
+        <span
+          aria-hidden="true"
+          class="text-lg transition-transform duration-300 group-hover:translate-x-1.5"
+        >
+          →
+        </span>
+      </a>
     </div>
   </section>
 
