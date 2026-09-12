@@ -23,6 +23,17 @@ const { title, description, image, type } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#ffffff" />
     <Seo title={title} description={description} image={image} type={type} />
+    {/* [data-reveal] content is only ever made visible by the reveal script
+        below — if JS is blocked or fails, this keeps it from staying
+        invisible forever. */}
+    <noscript>
+      <style>
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
     <script
       type="application/ld+json"
       set:html={JSON.stringify({

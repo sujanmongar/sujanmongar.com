@@ -13,7 +13,7 @@ const { left, leftAlt, right, rightAlt } = Astro.props;
 ---
 
 {/* Two oversized renders that overlap on desktop and stack on mobile, as on the original */}
-<div class="full-bleed my-[20px] px-4 sm:px-8">
+<div class="full-bleed my-[20px] px-4 sm:px-8" data-reveal>
   <div class="relative flex flex-col gap-4 md:block md:h-0 md:gap-0 md:pb-[56%]">
     <Image
       src={left}

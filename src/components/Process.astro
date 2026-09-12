@@ -10,15 +10,18 @@ const steps = [
 {/* Dark band: gives the page contrast and echoes the case study panels */}
 <section class="showcase-dark">
   <div class="wrap section">
-    <h2 class="font-display text-3xl font-medium text-paper sm:text-4xl">How I work</h2>
-    <p class="measure mt-5 text-lg leading-relaxed text-paper/60">
+    <h2 class="font-display text-3xl font-medium text-paper sm:text-4xl" data-reveal>How I work</h2>
+    <p class="measure mt-5 text-lg leading-relaxed text-paper/60" data-reveal>
       A short path from an unclear problem to design your team can build.
     </p>
 
-    <ol class="mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+    {/* A real dividing line only at the breakpoint where all four steps sit
+        in one row — at two columns it would wrongly cut across row 2 as
+        well, so it's skipped there rather than drawn half-right. */}
+    <ol class="stagger mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-white/15">
       {
         steps.map((step) => (
-          <li>
+          <li class="lg:px-2 lg:first:pl-0" data-reveal>
             <span class="font-display text-3xl font-medium text-accent">{step.n}</span>
             <h3 class="mt-4 text-xl font-semibold text-paper">{step.title}</h3>
             <p class="mt-3 leading-relaxed text-paper/60">{step.body}</p>

@@ -153,25 +153,19 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
     </div>
   </article>
 
-  <nav class="border-t border-line/70 bg-paper" aria-label="More projects">
-    <div
-      class:list={[
-        'wrap section grid gap-8',
-        prevProject && nextProject ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:max-w-2xl'
-      ]}
-    >
-      {
-        [
-          { project: prevProject, label: '← Previous project' },
-          { project: nextProject, label: 'Next project →' }
-        ]
-          .filter((entry) => entry.project)
-          .map(({ project, label }) => (
-            <a href={`/work/${project!.id}/`} class="group flex items-center gap-6">
+  {
+    (prevProject || nextProject) && (
+      <nav class="border-t border-line/70 bg-paper" aria-label="More projects">
+        {/* Always two columns, prev on the left and next mirrored to the
+            right — so a lone entry sits on the side that matches its
+            direction, instead of always hugging the left edge. */}
+        <div class="wrap grid grid-cols-1 gap-10 pt-12 pb-16 sm:grid-cols-2 sm:pt-14 sm:pb-20">
+          {prevProject && (
+            <a href={`/work/${prevProject.id}/`} class="group flex items-center gap-6 sm:col-start-1">
               <div class="w-32 shrink-0 overflow-hidden rounded-lg sm:w-44">
                 <Image
-                  src={project!.data.cover}
-                  alt={project!.data.coverAlt}
+                  src={prevProject.data.cover}
+                  alt={prevProject.data.coverAlt}
                   width={500}
                   quality={92}
                   loading="lazy"
@@ -179,14 +173,43 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
                 />
               </div>
               <div class="min-w-0">
-                <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">{label}</p>
+                <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
+                  ← Previous project
+                </p>
                 <h2 class="font-display mt-2 text-2xl font-medium transition-colors group-hover:text-accent sm:text-3xl">
-                  {project!.data.title}
+                  {prevProject.data.title}
                 </h2>
               </div>
             </a>
-          ))
-      }
-    </div>
-  </nav>
+          )}
+
+          {nextProject && (
+            <a
+              href={`/work/${nextProject.id}/`}
+              class="group flex items-center gap-6 sm:col-start-2 sm:flex-row-reverse sm:text-right"
+            >
+              <div class="w-32 shrink-0 overflow-hidden rounded-lg sm:w-44">
+                <Image
+                  src={nextProject.data.cover}
+                  alt={nextProject.data.coverAlt}
+                  width={500}
+                  quality={92}
+                  loading="lazy"
+                  class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+              </div>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
+                  Next project →
+                </p>
+                <h2 class="font-display mt-2 text-2xl font-medium transition-colors group-hover:text-accent sm:text-3xl">
+                  {nextProject.data.title}
+                </h2>
+              </div>
+            </a>
+          )}
+        </div>
+      </nav>
+    )
+  }
 </BaseLayout>

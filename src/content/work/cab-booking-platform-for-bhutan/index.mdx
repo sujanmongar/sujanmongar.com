@@ -15,6 +15,7 @@ order: 1
 import FullImage from "../../../components/case-study/FullImage.astro";
 import ShowcaseGrid from "../../../components/case-study/ShowcaseGrid.astro";
 import OverlapPair from "../../../components/case-study/OverlapPair.astro";
+import Section from "../../../components/case-study/Section.astro";
 import homepageMock from "./homepage-mock.webp";
 import mobileSearchList from "./mobile-search-list.webp";
 import homepageFull from "./web-homepage-full.webp";
@@ -41,11 +42,11 @@ travellers. It brings local rides, outstation trips, rentals and custom routes i
 mobile-responsive product, covering the full journey from search through to payment and booking
 confirmation.
 
-## The challenge
-
+<Section title="The challenge">
 Bhutan lacks an open and reliable cab-booking system. People still depend on manual calls or
 emails to find a ride, with limited providers, low vehicle availability, and very few car types.
 This makes booking slow, uncertain, and inconvenient for both tourists and local users.
+</Section>
 
 <FullImage
   src={mobileSearchList}
@@ -76,12 +77,12 @@ This makes booking slow, uncertain, and inconvenient for both tourists and local
   rightAlt="Account dashboard with booking history on desktop"
 />
 
-## The approach
-
+<Section title="The approach">
 I designed a complete cab-booking platform that brings all travel needs into one simple,
 trustworthy system. The solution includes clear booking flows, transparent pricing, verified
 drivers, multiple vehicle options, and a mobile-first interface. Users can easily book local
 rides, outstation trips, rentals, and custom routes with confidence and convenience.
+</Section>
 
 <FullImage
   src={signinSignup}
@@ -102,8 +103,7 @@ rides, outstation trips, rentals, and custom routes with confidence and convenie
 
 <FullImage src={drukdriveLogo} alt="DrukDrive" panel="dark" />
 
-## The outcome
-
+<Section title="The outcome">
 A complete, mobile-responsive design covering the full booking journey — search and filtering,
 vehicle comparison, account creation, OTP verification, payment and confirmation — delivered as a
 consistent UI system rather than a set of isolated screens.
@@ -113,3 +113,4 @@ consistent UI system rather than a set of isolated screens.
 - Defined a booking flow that surfaces price, vehicle type, and driver details up front.
 - Designed for both tourist and local use cases within the same core flow, rather than splitting
   into separate products.
+</Section>

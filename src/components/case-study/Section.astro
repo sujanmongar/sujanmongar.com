@@ -1,0 +1,17 @@
+---
+// Label-left, description-right — matches the "Problem" / "What I did"
+// layout on the live site. Deliberately not used for "Overview", which
+// stays a plain paragraph (the live site treats its "About" the same way).
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="case-section grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-12" data-reveal>
+  <h2 class="sm:col-span-4 lg:col-span-3">{title}</h2>
+  <div class="sm:col-span-8 lg:col-span-9">
+    <slot />
+  </div>
+</div>

@@ -31,7 +31,7 @@ const columns = [left, right];
 {/* Columns are wider than half the panel and pushed to the outer edges so they
     overlap slightly in the middle. Each screen carries its own transparent
     margin, which is what sets the spacing — the same mechanism as the original. */}
-<div class="full-bleed my-[20px] px-4 sm:px-8">
+<div class="full-bleed my-[20px] px-4 sm:px-8" data-reveal>
   <div class:list={['overflow-hidden rounded-lg', panelClass[panel]]}>
     <div class="flex flex-col md:flex-row">
       {

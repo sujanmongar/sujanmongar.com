@@ -23,7 +23,7 @@ const tag = coverTag ?? project.data.tags[0];
 
 {
   size === 'compact' ? (
-    <a href={`/work/${project.id}/`} class="group block">
+    <a href={`/work/${project.id}/`} class="group block" data-reveal>
       <div class:list={['relative overflow-hidden rounded-2xl shadow-lg shadow-ink/10', panel]}>
         {tag && (
           <span class="absolute top-4 left-4 z-10 rounded-full bg-paper/90 px-3 py-1 text-[11px] font-semibold tracking-wide text-ink backdrop-blur-sm">
@@ -32,7 +32,7 @@ const tag = coverTag ?? project.data.tags[0];
         )}
         {/* Aspect kept close to the artwork's own ratio, so it fills the
             frame instead of floating in a lot of dead letterbox space */}
-        <div class="grid aspect-[3/2] place-items-center p-6 sm:p-8">
+        <div class="grid aspect-[3/2] place-items-center p-4 sm:p-5">
           <Image
             src={cover}
             alt={coverAlt}
@@ -57,12 +57,12 @@ const tag = coverTag ?? project.data.tags[0];
       </div>
     </a>
   ) : (
-    <a href={`/work/${project.id}/`} class="group block">
+    <a href={`/work/${project.id}/`} class="group block" {...(!priority ? { 'data-reveal': true } : {})}>
       {/* One large frame — the work itself is the whole card */}
       <div class="wrap">
         <div
           class:list={[
-            'relative overflow-hidden rounded-[28px] px-8 py-8 shadow-xl shadow-ink/10 sm:px-16 sm:py-12',
+            'relative overflow-hidden rounded-[28px] px-6 py-6 shadow-xl shadow-ink/10 sm:px-10 sm:py-8',
             panel
           ]}
         >
