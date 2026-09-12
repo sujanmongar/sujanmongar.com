@@ -12,7 +12,18 @@ order: 1
 ---
 
 import FullImage from '../../../components/case-study/FullImage.astro';
+import BrandBand from '../../../components/case-study/BrandBand.astro';
 import homepageMock from './homepage-mock.webp';
+import signinSignup from './mobile-signin-signup.webp';
+import webSearchList from './web-search-list.webp';
+import mobileSearchList from './mobile-search-list.webp';
+import otpVerification from './web-otp-verification.webp';
+import paymentMethod from './web-payment-method.webp';
+import mobilePaymentSuccess from './mobile-payment-success.webp';
+import bookingReview from './web-booking-review.webp';
+import profileDashboard from './web-profile-dashboard.webp';
+import homepageFull from './web-homepage-full.webp';
+import drukdriveLogo from './drukdrive-logo.webp';
 
 ## Problem
 
@@ -27,7 +38,27 @@ trustworthy system. The solution includes clear booking flows, transparent prici
 drivers, multiple vehicle options, and a mobile-first interface. Users can easily book local
 rides, outstation trips, rentals, and custom routes with confidence and convenience.
 
-<FullImage src={homepageMock} alt="Homepage mockup of the cab booking platform" caption="Homepage design — mobile-first booking flow" />
+<FullImage src={homepageMock} alt="Homepage on web and mobile, showing the ride search form" caption="Homepage — search across ride types in one place" />
+
+<FullImage src={signinSignup} alt="Sign in and create account screens on mobile" dark caption="Creating an account and signing in" />
+
+<FullImage src={webSearchList} alt="Search results with filters on desktop" caption="Browsing available cabs with filters" />
+
+<FullImage src={mobileSearchList} alt="Homepage and search results on mobile" dark caption="The same search flow, optimized for mobile" />
+
+<FullImage src={otpVerification} alt="OTP verification screen before payment" caption="OTP verification before payment" />
+
+<FullImage src={paymentMethod} alt="Payment method selection screen" dark caption="Choosing a payment method — net banking or card" />
+
+<FullImage src={mobilePaymentSuccess} alt="Payment method and booking successful screens on mobile" caption="Payment and booking confirmation on mobile" />
+
+<FullImage src={bookingReview} alt="Booking review and price summary screen" dark caption="Reviewing the booking before final payment" />
+
+<FullImage src={profileDashboard} alt="Account dashboard with booking history" caption="Account dashboard — bookings, past trips, and reviews" />
+
+<FullImage src={homepageFull} alt="Full homepage with recent searches, popular cars, and FAQs" dark caption="The full homepage — recent searches, popular cars, and FAQs" />
+
+<BrandBand logo={drukdriveLogo} logoAlt="DrukDrive" />
 
 ## Approach
 

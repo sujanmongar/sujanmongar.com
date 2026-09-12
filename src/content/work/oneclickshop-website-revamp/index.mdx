@@ -11,6 +11,21 @@ featured: true
 order: 2
 ---
 
+import FullImage from '../../../components/case-study/FullImage.astro';
+import BrandBand from '../../../components/case-study/BrandBand.astro';
+import homepageHero from './homepage-hero.webp';
+import searchAutocomplete from './search-autocomplete.webp';
+import cartPopup from './cart-popup.webp';
+import productDetailMobile from './product-detail-mobile.webp';
+import searchResults from './search-results.webp';
+import cart from './cart.webp';
+import checkoutDelivery from './checkout-delivery.webp';
+import checkoutPayment from './checkout-payment.webp';
+import checkoutConfirm from './checkout-confirm.webp';
+import signIn from './sign-in.webp';
+import homepageFullMobile from './homepage-full-mobile.webp';
+import oneclickshopLogo from './oneclickshop-logo.webp';
+
 ## Problem
 
 The existing OneClickShop website lacked a clear structure, consistent branding, and a smooth
@@ -24,6 +39,30 @@ and a more intuitive shopping journey. The revamp includes modern UI elements, s
 navigation, stronger visual branding, and a mobile-first responsive design. The result is a
 faster, clearer, and more user-friendly e-commerce experience that supports better browsing and
 higher conversions.
+
+<FullImage src={homepageHero} alt="OneClickShop homepage with best-selling products and restaurant partners" caption="Homepage — categories, best sellers, and local partners in one browse" />
+
+<FullImage src={searchAutocomplete} alt="Search bar with autocomplete suggestions" dark caption="Search with live suggestions" />
+
+<FullImage src={cartPopup} alt="Cart flyout shown from a product page" caption="Add-to-cart flyout — no lost place on the page" />
+
+<FullImage src={productDetailMobile} alt="Product detail page on a narrow mobile viewport" dark caption="Product detail — responsive down to mobile" />
+
+<FullImage src={searchResults} alt="Search results grid with filters" caption="Search results with filtering by price, brand, and rating" />
+
+<FullImage src={cart} alt="Shopping cart with price summary" dark caption="Cart — clear pricing before checkout" />
+
+<FullImage src={checkoutDelivery} alt="Checkout step one, delivery details" caption="Checkout, step 1 — delivery details" />
+
+<FullImage src={checkoutPayment} alt="Checkout step two, payment method selection" dark caption="Checkout, step 2 — payment method" />
+
+<FullImage src={checkoutConfirm} alt="Checkout step three, order confirmation" caption="Checkout, step 3 — review and confirm" />
+
+<FullImage src={signIn} alt="Sign in screen" dark caption="Sign in — kept minimal, social options up front" />
+
+<FullImage src={homepageFullMobile} alt="Full homepage on a narrow mobile viewport" caption="The full homepage, responsive down to mobile width" />
+
+<BrandBand logo={oneclickshopLogo} logoAlt="OneClickShop" dark={false} />
 
 ## Approach
 

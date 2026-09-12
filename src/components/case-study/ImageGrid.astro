@@ -9,22 +9,27 @@ interface GridImage {
 
 interface Props {
   images: GridImage[];
+  dark?: boolean;
+  cols?: 2 | 3;
 }
 
-const { images } = Astro.props;
+const { images, dark = false, cols = 2 } = Astro.props;
+const colsClass = cols === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
 ---
 
-<div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-  {
-    images.map((img) => (
-      <Image
-        src={img.src}
-        alt={img.alt}
-        width={800}
-        height={800}
-        loading="lazy"
-        class="aspect-square w-full rounded-2xl border border-line/70 object-cover"
-      />
-    ))
-  }
+<div class:list={['full-bleed my-16 py-10 sm:py-16', dark && 'bg-ink']}>
+  <div class:list={['mx-auto grid max-w-5xl grid-cols-1 gap-4 px-6', colsClass]}>
+    {
+      images.map((img) => (
+        <Image
+          src={img.src}
+          alt={img.alt}
+          width={900}
+          height={900}
+          loading="lazy"
+          class="aspect-square w-full rounded-2xl object-cover"
+        />
+      ))
+    }
+  </div>
 </div>

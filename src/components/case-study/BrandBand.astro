@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro:assets';
+
+interface Props {
+  text?: string;
+  logo?: ImageMetadata;
+  logoAlt?: string;
+  dark?: boolean;
+}
+
+const { text, logo, logoAlt, dark = true } = Astro.props;
+---
+
+<div
+  class:list={['full-bleed my-16 py-20 sm:py-28', dark ? 'bg-ink' : 'bg-paper-dim']}
+>
+  {
+    logo ? (
+      <Image src={logo} alt={logoAlt ?? ''} width={480} height={160} class="mx-auto w-auto max-w-xs object-contain" />
+    ) : (
+      <p
+        class:list={[
+          'font-display text-center text-5xl font-medium italic sm:text-7xl',
+          dark ? 'text-paper' : 'text-ink'
+        ]}
+      >
+        {text}
+      </p>
+    )
+  }
+</div>
