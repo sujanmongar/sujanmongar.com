@@ -95,9 +95,11 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
       <h1 class="font-display mt-6 text-4xl leading-[1.05] font-medium sm:text-6xl">
         {title}
       </h1>
-      <p class="mt-6 text-lg text-ink-soft">{summary}</p>
 
-      <dl class="mt-10 grid grid-cols-2 gap-6 border-y border-line/70 py-8 sm:grid-cols-4">
+      {/* No summary paragraph here — the content's own "Overview" section
+          says the same thing in more depth right below. `summary` still
+          drives the meta description and structured data. */}
+      <dl class="mt-8 grid grid-cols-2 gap-6 border-y border-line/70 py-8 sm:grid-cols-4">
         <div>
           <dt class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Role</dt>
           <dd class="mt-1 font-medium">{role}</dd>
@@ -218,26 +220,26 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
         const label = prevProject ? '← Previous project' : 'Next project →';
         return (
           <nav class="border-t border-line/70 bg-paper" aria-label="More projects">
-            <div class="wrap flex flex-col items-center py-16 text-center sm:py-20">
-              <a
-                href={`/work/${solo.id}/`}
-                class="group inline-flex flex-col items-center gap-8 sm:flex-row sm:gap-10"
-              >
-                <div class="w-48 shrink-0 overflow-hidden rounded-xl sm:w-64">
+            {/* Image and text keep the same left-to-right reading order and
+                left-aligned text as the paired layout — only the whole
+                block is centered on the page, not the text within it. */}
+            <div class="wrap flex justify-center py-16 sm:py-20">
+              <a href={`/work/${solo.id}/`} class="group flex items-center gap-6 sm:gap-8">
+                <div class="w-32 shrink-0 overflow-hidden rounded-lg sm:w-48">
                   <Image
                     src={solo.data.cover}
                     alt={solo.data.coverAlt}
-                    width={800}
+                    width={700}
                     quality={92}
                     loading="lazy"
                     class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
-                <div>
+                <div class="min-w-0">
                   <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
                     {label}
                   </p>
-                  <h2 class="font-display mt-3 text-3xl font-medium transition-colors group-hover:text-accent sm:text-5xl">
+                  <h2 class="font-display mt-2 text-2xl font-medium transition-colors group-hover:text-accent sm:text-4xl">
                     {solo.data.title}
                   </h2>
                 </div>
