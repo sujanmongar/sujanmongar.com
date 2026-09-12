@@ -15,22 +15,48 @@ import FullImage from '../../../components/case-study/FullImage.astro';
 import ShowcaseGrid from '../../../components/case-study/ShowcaseGrid.astro';
 import BrandBand from '../../../components/case-study/BrandBand.astro';
 import homepageMock from './homepage-mock.webp';
-import signinSignup from './mobile-signin-signup.webp';
-import webSearchList from './web-search-list.webp';
 import mobileSearchList from './mobile-search-list.webp';
-import otpVerification from './web-otp-verification.webp';
-import paymentMethod from './web-payment-method.webp';
-import mobilePaymentSuccess from './mobile-payment-success.webp';
-import bookingReview from './web-booking-review.webp';
-import profileDashboard from './web-profile-dashboard.webp';
 import homepageFull from './web-homepage-full.webp';
+import webSearchList from './web-search-list.webp';
+import paymentMethod from './web-payment-method.webp';
+import otpVerification from './web-otp-verification.webp';
+import bookingReview from './web-booking-review.webp';
+import laptopHomepage from './laptop-homepage.webp';
+import laptopBookings from './laptop-bookings.webp';
+import signinSignup from './mobile-signin-signup.webp';
+import profileDashboard from './web-profile-dashboard.webp';
+import mobilePaymentSuccess from './mobile-payment-success.webp';
 import drukdriveLogo from './drukdrive-logo.webp';
+
+<FullImage src={homepageMock} alt="Homepage on web and mobile, showing the ride search form" plain />
 
 ## Problem
 
 Bhutan lacks an open and reliable cab-booking system. People still depend on manual calls or
 emails to find a ride, with limited providers, low vehicle availability, and very few car types.
 This makes booking slow, uncertain, and inconvenient for both tourists and local users.
+
+<FullImage src={mobileSearchList} alt="Homepage and search results on mobile" dark />
+
+<ShowcaseGrid
+  dark
+  logo={drukdriveLogo}
+  logoAlt="DrukDrive"
+  items={[
+    { src: homepageFull, alt: 'Full homepage with recent searches, popular cars, and FAQs' },
+    { src: webSearchList, alt: 'Search results with filters on desktop' },
+    { src: paymentMethod, alt: 'Payment method selection screen' },
+    { src: otpVerification, alt: 'OTP verification screen before payment' },
+    { src: bookingReview, alt: 'Booking review and price summary screen', span: 2 }
+  ]}
+/>
+
+<ShowcaseGrid
+  items={[
+    { src: laptopHomepage, alt: 'Homepage search on desktop' },
+    { src: laptopBookings, alt: 'Account dashboard with booking history on desktop' }
+  ]}
+/>
 
 ## What I did
 
@@ -39,27 +65,11 @@ trustworthy system. The solution includes clear booking flows, transparent prici
 drivers, multiple vehicle options, and a mobile-first interface. Users can easily book local
 rides, outstation trips, rentals, and custom routes with confidence and convenience.
 
-<FullImage src={homepageMock} alt="Homepage on web and mobile, showing the ride search form" plain />
-
-<FullImage src={signinSignup} alt="Sign in and create account screens on mobile" dark bleed />
-
-<ShowcaseGrid
-  dark
-  items={[
-    { src: webSearchList, alt: 'Search results with filters on desktop' },
-    { src: otpVerification, alt: 'OTP verification screen before payment' },
-    { src: paymentMethod, alt: 'Payment method selection screen' },
-    { src: bookingReview, alt: 'Booking review and price summary screen' }
-  ]}
-/>
-
-<FullImage src={mobileSearchList} alt="Homepage and search results on mobile" />
+<FullImage src={signinSignup} alt="Sign in and create account screens on mobile" bleed />
 
 <FullImage src={profileDashboard} alt="Account dashboard with booking history" dark />
 
 <FullImage src={mobilePaymentSuccess} alt="Payment method and booking successful screens on mobile" />
-
-<FullImage src={homepageFull} alt="Full homepage with recent searches, popular cars, and FAQs" dark />
 
 <BrandBand logo={drukdriveLogo} logoAlt="DrukDrive" />
 

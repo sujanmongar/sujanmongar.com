@@ -15,23 +15,47 @@ import FullImage from '../../../components/case-study/FullImage.astro';
 import ShowcaseGrid from '../../../components/case-study/ShowcaseGrid.astro';
 import BrandBand from '../../../components/case-study/BrandBand.astro';
 import homepageHero from './homepage-hero.webp';
-import searchAutocomplete from './search-autocomplete.webp';
-import cartPopup from './cart-popup.webp';
 import productDetailMobile from './product-detail-mobile.webp';
+import homepageFullMobile from './homepage-full-mobile.webp';
 import searchResults from './search-results.webp';
 import cart from './cart.webp';
 import checkoutDelivery from './checkout-delivery.webp';
 import checkoutPayment from './checkout-payment.webp';
 import checkoutConfirm from './checkout-confirm.webp';
+import searchAutocomplete from './search-autocomplete.webp';
+import cartPopup from './cart-popup.webp';
 import signIn from './sign-in.webp';
-import homepageFullMobile from './homepage-full-mobile.webp';
 import oneclickshopLogo from './oneclickshop-logo.webp';
+
+<FullImage src={homepageHero} alt="OneClickShop homepage with best-selling products and restaurant partners" plain />
 
 ## Problem
 
 The existing OneClickShop website lacked a clear structure, consistent branding, and a smooth
 shopping experience. Users struggled with navigation, product discovery, and checkout flow,
 leading to low engagement and poor conversion performance.
+
+<FullImage src={productDetailMobile} alt="Product detail page on a narrow mobile viewport" dark />
+
+<ShowcaseGrid
+  dark
+  logo={oneclickshopLogo}
+  logoAlt="OneClickShop"
+  items={[
+    { src: homepageFullMobile, alt: 'Full homepage on a narrow mobile viewport' },
+    { src: searchResults, alt: 'Search results grid with filters' },
+    { src: checkoutDelivery, alt: 'Checkout step one, delivery details' },
+    { src: checkoutPayment, alt: 'Checkout step two, payment method selection' },
+    { src: checkoutConfirm, alt: 'Checkout step three, order confirmation', span: 2 }
+  ]}
+/>
+
+<ShowcaseGrid
+  items={[
+    { src: searchAutocomplete, alt: 'Search bar with autocomplete suggestions on desktop' },
+    { src: cartPopup, alt: 'Cart flyout shown from a product page on desktop' }
+  ]}
+/>
 
 ## What I did
 
@@ -41,29 +65,9 @@ navigation, stronger visual branding, and a mobile-first responsive design. The 
 faster, clearer, and more user-friendly e-commerce experience that supports better browsing and
 higher conversions.
 
-<FullImage src={homepageHero} alt="OneClickShop homepage with best-selling products and restaurant partners" plain />
+<FullImage src={cart} alt="Shopping cart with price summary" />
 
-<FullImage src={searchAutocomplete} alt="Search bar with autocomplete suggestions" dark />
-
-<FullImage src={cartPopup} alt="Cart flyout shown from a product page" />
-
-<FullImage src={productDetailMobile} alt="Product detail page on a narrow mobile viewport" dark />
-
-<FullImage src={searchResults} alt="Search results grid with filters" />
-
-<ShowcaseGrid
-  dark
-  items={[
-    { src: cart, alt: 'Shopping cart with price summary' },
-    { src: checkoutDelivery, alt: 'Checkout step one, delivery details' },
-    { src: checkoutPayment, alt: 'Checkout step two, payment method selection' },
-    { src: checkoutConfirm, alt: 'Checkout step three, order confirmation' }
-  ]}
-/>
-
-<FullImage src={signIn} alt="Sign in screen" />
-
-<FullImage src={homepageFullMobile} alt="Full homepage on a narrow mobile viewport" dark />
+<FullImage src={signIn} alt="Sign in screen" dark />
 
 <BrandBand logo={oneclickshopLogo} logoAlt="OneClickShop" dark={false} />
 
