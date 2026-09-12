@@ -100,44 +100,38 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
     </div>
   </article>
 
-  <div
-    class:list={[
-      'grid border-t border-line/70 bg-paper-dim',
-      prevProject && nextProject ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'
-    ]}
-  >
-    {
-      prevProject && (
-        <a
-          href={`/work/${prevProject.id}/`}
-          class:list={[
-            'group block px-6 py-16 text-center transition-colors hover:bg-accent-soft sm:py-24',
-            nextProject && 'border-b border-line/70 sm:border-r sm:border-b-0'
-          ]}
-        >
-          <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
-            ← Previous project
-          </p>
-          <h2 class="font-display mt-4 text-3xl font-medium italic transition-colors group-hover:text-accent sm:text-5xl">
-            {prevProject.data.title}
-          </h2>
-        </a>
-      )
-    }
-    {
-      nextProject && (
-        <a
-          href={`/work/${nextProject.id}/`}
-          class="group block px-6 py-16 text-center transition-colors hover:bg-accent-soft sm:py-24"
-        >
-          <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
-            Next project →
-          </p>
-          <h2 class="font-display mt-4 text-3xl font-medium italic transition-colors group-hover:text-accent sm:text-5xl">
-            {nextProject.data.title}
-          </h2>
-        </a>
-      )
-    }
-  </div>
+  <nav class="border-t border-line/70 bg-paper px-6 py-16 sm:py-20" aria-label="More projects">
+    <div
+      class:list={[
+        'mx-auto grid max-w-6xl gap-10',
+        prevProject && nextProject ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:max-w-2xl'
+      ]}
+    >
+      {
+        [
+          { project: prevProject, label: '← Previous project' },
+          { project: nextProject, label: 'Next project →' }
+        ]
+          .filter((entry) => entry.project)
+          .map(({ project, label }) => (
+            <a href={`/work/${project!.id}/`} class="group block">
+              <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">{label}</p>
+              <div class="mt-5 overflow-hidden rounded-lg bg-paper-dim">
+                <Image
+                  src={project!.data.cover}
+                  alt={project!.data.coverAlt}
+                  width={1200}
+                  quality={92}
+                  loading="lazy"
+                  class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+              <h2 class="font-display mt-5 text-2xl font-medium italic transition-colors group-hover:text-accent sm:text-3xl">
+                {project!.data.title}
+              </h2>
+            </a>
+          ))
+      }
+    </div>
+  </nav>
 </BaseLayout>

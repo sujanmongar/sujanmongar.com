@@ -2,25 +2,29 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro:assets';
 
+type Panel = 'dark' | 'dark-v' | 'dark-d' | 'light' | 'mist' | 'plain';
+
 interface Props {
   src: ImageMetadata;
   alt: string;
-  /** 'dark' and 'light' render a gradient panel; 'plain' sits on the page background */
-  panel?: 'dark' | 'dark-v' | 'light' | 'plain';
+  /** Gradient panel behind the image; 'plain' sits on the page background */
+  panel?: Panel;
 }
 
 const { src, alt, panel = 'plain' } = Astro.props;
 
-const panelClass = {
+const panelClass: Record<Panel, string> = {
   dark: 'showcase-dark',
   'dark-v': 'showcase-dark-v',
+  'dark-d': 'showcase-dark-d',
   light: 'showcase-grey',
+  mist: 'showcase-mist',
   plain: ''
-}[panel];
+};
 ---
 
 <div class="full-bleed my-6 px-4 sm:px-8">
-  <div class:list={['overflow-hidden rounded-lg', panelClass]}>
-    <Image src={src} alt={alt} width={2000} quality={92} loading="lazy" class="h-auto w-full" />
+  <div class:list={['overflow-hidden rounded-lg', panelClass[panel]]}>
+    <Image src={src} alt={alt} width={2800} quality={92} loading="lazy" class="h-auto w-full" />
   </div>
 </div>

@@ -42,8 +42,16 @@ html {
   background: linear-gradient(180deg, #343434, #535050, #1f1e1e);
 }
 
+.showcase-dark-d {
+  background: linear-gradient(145deg, #343434, #535050, #1f1e1e);
+}
+
 .showcase-grey {
   background: linear-gradient(90deg, #e5e5e5, #ffffff, #dddddd);
+}
+
+.showcase-mist {
+  background: linear-gradient(90deg, #f9fafb, #e5e7eb, #f9fafb);
 }
 
 /* Flat screens flow into two uneven columns, as on the original */
