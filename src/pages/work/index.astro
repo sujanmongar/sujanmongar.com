@@ -22,15 +22,7 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
     </div>
   </section>
 
-  <section class="pb-[clamp(4rem,9vw,7rem)]">
-    <div class="wrap">
-      <div class="space-y-24 sm:space-y-32">
-        {
-          work.map((project, i) => (
-            <ProjectCard project={project} index={i} priority={i === 0} />
-          ))
-        }
-      </div>
-    </div>
+  <section class="space-y-24 pb-[clamp(4rem,9vw,7rem)] sm:space-y-32">
+    {work.map((project, i) => <ProjectCard project={project} index={i} priority={i === 0} />)}
   </section>
 </BaseLayout>

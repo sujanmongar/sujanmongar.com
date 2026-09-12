@@ -11,54 +11,54 @@ interface Props {
 const { project, index, priority = false } = Astro.props;
 const { title, summary, cover, coverAlt, tags, role, timeline } = project.data;
 
-// Alternate the panel tone so a list of projects has rhythm, and reuse the same
-// gradients the case studies use so the whole site reads as one thing.
+// Alternating tone, reusing the case study panel gradients so the whole site
+// speaks one language.
 const panel = index % 2 === 0 ? 'showcase-dark' : 'showcase-grey';
+const number = String(index + 1).padStart(2, '0');
 ---
 
 <a href={`/work/${project.id}/`} class="group block">
-  <div class:list={['overflow-hidden rounded-2xl', panel]}>
-    <Image
-      src={cover}
-      alt={coverAlt}
-      width={2000}
-      quality={92}
-      loading={priority ? 'eager' : 'lazy'}
-      class="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-    />
-  </div>
-
-  <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-12 md:items-start md:gap-10">
-    <div class="md:col-span-7">
+  {/* Title row sits above the panel so the work itself stays the hero */}
+  <div class="wrap flex flex-wrap items-end justify-between gap-x-10 gap-y-4 pb-6">
+    <div class="flex items-baseline gap-5">
+      <span class="font-mono text-sm text-accent">{number}</span>
       <h3
-        class="font-display text-3xl leading-tight font-medium transition-colors group-hover:text-accent sm:text-4xl lg:text-5xl"
+        class="font-display text-[clamp(1.9rem,4.4vw,3.5rem)] leading-none font-medium tracking-[-0.01em] transition-colors group-hover:text-accent"
       >
         {title}
       </h3>
-      <p class="measure mt-4 text-lg leading-relaxed text-ink-soft">{summary}</p>
     </div>
+    <span class="text-sm text-ink-soft">{timeline}</span>
+  </div>
 
-    <div class="md:col-span-5 md:pt-2">
-      <dl class="flex flex-wrap gap-x-10 gap-y-4">
-        <div>
-          <dt class="text-xs tracking-[0.12em] text-ink-soft uppercase">Role</dt>
-          <dd class="mt-1.5 font-medium">{role}</dd>
-        </div>
-        <div>
-          <dt class="text-xs tracking-[0.12em] text-ink-soft uppercase">Year</dt>
-          <dd class="mt-1.5 font-medium">{timeline}</dd>
-        </div>
-      </dl>
+  <div class:list={['full-bleed overflow-hidden', panel]}>
+    <Image
+      src={cover}
+      alt={coverAlt}
+      width={2400}
+      quality={92}
+      loading={priority ? 'eager' : 'lazy'}
+      class="mx-auto h-auto w-full max-w-[1600px] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+    />
+  </div>
 
-      <ul class="mt-6 flex flex-wrap gap-2">
-        {
-          tags.slice(0, 3).map((tag) => (
-            <li class="rounded-full bg-paper-dim px-3.5 py-1.5 text-sm text-ink-soft">{tag}</li>
-          ))
-        }
-      </ul>
+  <div class="wrap grid grid-cols-1 gap-6 pt-7 md:grid-cols-12 md:gap-10">
+    <p class="measure text-lg leading-relaxed text-ink-soft md:col-span-7">{summary}</p>
 
-      <span class="mt-7 inline-flex items-center gap-2 text-sm font-semibold">
+    <div class="md:col-span-5 md:flex md:items-start md:justify-between md:gap-8">
+      <div>
+        <p class="text-xs tracking-[0.14em] text-ink-soft uppercase">Role</p>
+        <p class="mt-2 font-medium">{role}</p>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          {
+            tags.slice(0, 3).map((tag) => (
+              <li class="rounded-full bg-paper-dim px-3.5 py-1.5 text-sm text-ink-soft">{tag}</li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <span class="mt-6 inline-flex shrink-0 items-center gap-2 text-sm font-semibold md:mt-1">
         View case study
         <span
           aria-hidden="true"

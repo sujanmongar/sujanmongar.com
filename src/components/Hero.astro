@@ -1,24 +1,66 @@
 ---
+const meta = [
+  { label: 'Role', value: 'Product Designer (UX/UI)' },
+  { label: 'Based in', value: 'Thimphu, Bhutan' },
+  { label: 'Experience', value: 'Web & mobile products' }
+];
 ---
 
-{/* Deliberately spare: a greeting, one claim, and where to go next. */}
-<section class="section">
-  <div class="wrap">
-    <p class="flex items-center gap-2 text-ink-soft">
-      <span aria-hidden="true">👋</span>
-      <span><span class="font-medium text-ink">Kuzu Zangpo La</span> — welcome.</span>
-    </p>
+<section class="wrap pt-10 pb-[clamp(3rem,7vw,6rem)] sm:pt-16">
+  <p class="flex items-center gap-2.5 text-sm text-ink-soft">
+    <span class="relative flex size-2">
+      <span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60"
+      ></span>
+      <span class="relative inline-flex size-2 rounded-full bg-accent"></span>
+    </span>
+    Available for freelance work and full-time roles
+  </p>
 
-    <h1
-      class="font-display mt-6 text-[2.25rem] leading-[1.12] font-medium sm:mt-8 sm:text-6xl sm:leading-[1.05] lg:text-7xl"
-    >
-      Designing products that are <em class="text-accent not-italic">clear</em>, usable and built
-      to <em class="italic">scale.</em>
-    </h1>
+  <h1
+    class="font-display mt-10 text-[clamp(2.75rem,8.2vw,8.5rem)] leading-[0.95] font-medium tracking-[-0.02em] sm:mt-14"
+  >
+    Designing products<br />
+    that are <em class="text-accent not-italic">clear</em>,<br />
+    usable and built<br />
+    to <em class="italic">scale.</em>
+  </h1>
 
-    <p class="measure mt-8 text-lg leading-relaxed text-ink-soft sm:mt-10">
-      Sujan Mongar — Product Designer (UX/UI) in Thimphu, Bhutan. Currently available for
-      freelance work and full-time roles.
-    </p>
+  <div
+    class="mt-12 grid grid-cols-1 gap-8 border-t border-line/70 pt-8 sm:mt-16 sm:grid-cols-3 sm:gap-10"
+  >
+    {
+      meta.map((item) => (
+        <div>
+          <dt class="text-xs tracking-[0.14em] text-ink-soft uppercase">{item.label}</dt>
+          <dd class="mt-2 font-medium">{item.value}</dd>
+        </div>
+      ))
+    }
   </div>
 </section>
+
+{/* Capabilities, stated once and kept moving so the page has a pulse */}
+<div class="marquee overflow-hidden border-y border-line/70 py-5">
+  <div class="marquee-track">
+    {
+      [0, 1].map(() => (
+        <ul class="flex shrink-0 items-center" aria-hidden={undefined}>
+          {[
+            'UX Audits',
+            'User Research',
+            'Usability Testing',
+            'Wireframing',
+            'High-fidelity UI',
+            'Design Systems',
+            'Prototyping'
+          ].map((item) => (
+            <li class="flex shrink-0 items-center gap-8 pr-8 text-lg text-ink-soft sm:text-xl">
+              {item}
+              <span class="size-1.5 rounded-full bg-accent" aria-hidden="true" />
+            </li>
+          ))}
+        </ul>
+      ))
+    }
+  </div>
+</div>
