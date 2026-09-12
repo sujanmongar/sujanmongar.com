@@ -29,13 +29,25 @@ const projects = (featured.length > 0 ? featured : work).slice(0, 4);
     <ProjectCard project={projects[0]} index={0} priority size="feature" />
 
     {
-      projects.length > 1 && (
-        <div class="wrap mt-20 grid grid-cols-1 gap-x-12 gap-y-16 sm:mt-24 sm:grid-cols-2">
-          {projects
-            .slice(1)
-            .map((project, i) => <ProjectCard project={project} index={i + 1} size="compact" />)}
-        </div>
-      )
+      projects.length > 1 &&
+        (() => {
+          const secondary = projects.slice(1);
+          // An odd count leaves a trailing entry with no partner — give it
+          // the full row instead of leaving an empty cell beside it.
+          const lastWideIndex = secondary.length % 2 === 1 ? secondary.length - 1 : -1;
+          return (
+            <div class="wrap mt-20 grid grid-cols-1 gap-x-12 gap-y-16 sm:mt-24 sm:grid-cols-2">
+              {secondary.map((project, i) => (
+                <ProjectCard
+                  project={project}
+                  index={i + 1}
+                  size="compact"
+                  wide={i === lastWideIndex}
+                />
+              ))}
+            </div>
+          );
+        })()
     }
 
     <div class="wrap mt-20 flex justify-center sm:mt-24">
