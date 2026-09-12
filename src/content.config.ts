@@ -13,6 +13,9 @@ const work = defineCollection({
       summary: z.string(),
       cover: image(),
       coverAlt: z.string(),
+      // Optional short label shown over the cover itself, so the work reads
+      // at a glance without scrolling to the caption. Falls back to tags[0].
+      coverTag: z.string().optional(),
       tags: z.array(z.string()).default([]),
       role: z.string(),
       timeline: z.string(),

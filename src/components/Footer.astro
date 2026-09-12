@@ -64,7 +64,7 @@ const accessKey =
               placeholder="Your name"
               class="mt-2 w-full rounded-lg border border-ink/15 bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
             />
-            <p data-error-for="name" class="mt-2 hidden text-sm text-accent"></p>
+            <p data-error-for="name" class="mt-2 hidden text-sm text-danger"></p>
           </div>
           <div>
             <label for="email" class="text-xs font-semibold tracking-[0.1em] text-ink-soft uppercase">
@@ -78,7 +78,7 @@ const accessKey =
               placeholder="you@studio.com"
               class="mt-2 w-full rounded-lg border border-ink/15 bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
             />
-            <p data-error-for="email" class="mt-2 hidden text-sm text-accent"></p>
+            <p data-error-for="email" class="mt-2 hidden text-sm text-danger"></p>
           </div>
         </div>
         <div>
@@ -93,7 +93,7 @@ const accessKey =
             placeholder="What are you building, and when do you need it?"
             class="mt-2 w-full resize-none rounded-lg border border-ink/15 bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-soft/60 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
           ></textarea>
-          <p data-error-for="message" class="mt-2 hidden text-sm text-accent"></p>
+          <p data-error-for="message" class="mt-2 hidden text-sm text-danger"></p>
         </div>
 
         <div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -129,7 +129,8 @@ const accessKey =
       el.textContent = message;
       el.classList.toggle('hidden', !message);
     }
-    input?.classList.toggle('border-accent', Boolean(message));
+    input?.classList.toggle('border-danger', Boolean(message));
+    input?.classList.toggle('focus:ring-danger', Boolean(message));
     input?.setAttribute('aria-invalid', message ? 'true' : 'false');
   };
 

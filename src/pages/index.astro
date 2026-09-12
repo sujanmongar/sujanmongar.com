@@ -23,9 +23,20 @@ const projects = (featured.length > 0 ? featured : work).slice(0, 4);
       <h2 class="font-display text-3xl font-medium sm:text-4xl">Work I'm proud of</h2>
     </div>
 
-    <div class="space-y-24 sm:space-y-32">
-      {projects.map((project, i) => <ProjectCard project={project} index={i} priority={i === 0} />)}
-    </div>
+    {/* The first project runs full-width as the lead story; the rest sit in
+        a tighter grid below, so adding a 3rd or 4th project doesn't just
+        make the homepage longer and longer. */}
+    <ProjectCard project={projects[0]} index={0} priority size="feature" />
+
+    {
+      projects.length > 1 && (
+        <div class="wrap mt-20 grid grid-cols-1 gap-x-10 gap-y-16 sm:mt-24 sm:grid-cols-2 lg:grid-cols-3">
+          {projects
+            .slice(1)
+            .map((project, i) => <ProjectCard project={project} index={i + 1} size="compact" />)}
+        </div>
+      )
+    }
 
     <div class="wrap mt-20 flex justify-center sm:mt-24">
       <a

@@ -6,53 +6,118 @@ interface Props {
   project: CollectionEntry<'work'>;
   index: number;
   priority?: boolean;
+  /* 'feature' is the full-width showcase; 'compact' is a smaller grid
+     entry, used once a page is carrying more than one or two projects. */
+  size?: 'feature' | 'compact';
 }
 
-const { project, index, priority = false } = Astro.props;
-const { title, summary, cover, coverAlt, role, timeline } = project.data;
+const { project, index, priority = false, size = 'feature' } = Astro.props;
+const { title, summary, cover, coverAlt, coverTag, role, timeline } = project.data;
 
 // Alternating tone, reusing the case study panel gradients so the whole
 // site speaks one language.
 const panel = index % 2 === 0 ? 'showcase-dark' : 'showcase-grey';
+const tag = coverTag ?? project.data.tags[0];
 ---
 
-<a href={`/work/${project.id}/`} class="group block">
-  {/* One large frame — the work itself is the whole card */}
-  <div class="wrap">
-    <div class:list={['overflow-hidden rounded-2xl px-6 py-5 sm:px-14 sm:py-9', panel]}>
-      <Image
-        src={cover}
-        alt={coverAlt}
-        width={2000}
-        quality={92}
-        loading={priority ? 'eager' : 'lazy'}
-        class="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-      />
-    </div>
-  </div>
-
-  {/* Title and meta read underneath, like a caption */}
-  <div class="wrap mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:items-end sm:justify-between">
-    <div>
-      <h3
-        class="font-display text-[clamp(1.75rem,3.6vw,2.75rem)] leading-tight font-medium tracking-[-0.01em] transition-colors group-hover:text-accent"
+{
+  size === 'compact' ? (
+    <a href={`/work/${project.id}/`} class="group block">
+      <div
+        class:list={[
+          'relative overflow-hidden rounded-2xl shadow-lg shadow-ink/10',
+          panel
+        ]}
       >
-        {title}
-      </h3>
-      <p class="measure mt-3 text-lg leading-relaxed text-ink-soft">{summary}</p>
-    </div>
+        {tag && (
+          <span class="absolute top-4 left-4 z-10 rounded-full bg-paper/90 px-3 py-1 text-[11px] font-semibold tracking-wide text-ink backdrop-blur-sm">
+            {tag}
+          </span>
+        )}
+        <div class="grid aspect-[4/3] place-items-center p-6 sm:aspect-[16/12]">
+          <Image
+            src={cover}
+            alt={coverAlt}
+            width={1000}
+            quality={92}
+            loading={priority ? 'eager' : 'lazy'}
+            class="h-auto w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          />
+        </div>
+      </div>
 
-    <div class="flex shrink-0 items-center gap-6 sm:flex-col sm:items-end sm:gap-2 sm:text-right">
-      <p class="text-sm text-ink-soft">{role} · {timeline}</p>
-      <span class="inline-flex items-center gap-2 text-sm font-semibold">
-        View case study
-        <span
-          aria-hidden="true"
-          class="text-lg transition-transform duration-300 group-hover:translate-x-1.5"
+      <div class="mt-5">
+        <h3 class="font-display text-xl font-medium transition-colors group-hover:text-accent">
+          {title}
+        </h3>
+        <p class="mt-1.5 flex items-center justify-between text-sm text-ink-soft">
+          <span>
+            {role} · {timeline}
+          </span>
+          <span
+            aria-hidden="true"
+            class="text-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          >
+            →
+          </span>
+        </p>
+      </div>
+    </a>
+  ) : (
+    <a href={`/work/${project.id}/`} class="group block">
+      {/* One large frame — the work itself is the whole card */}
+      <div class="wrap">
+        <div
+          class:list={[
+            'relative overflow-hidden rounded-[28px] px-6 py-5 shadow-xl shadow-ink/10 sm:px-14 sm:py-9',
+            panel
+          ]}
         >
-          →
-        </span>
-      </span>
-    </div>
-  </div>
-</a>
+          {/* Read at a glance, before scrolling to the caption below */}
+          {tag && (
+            <span class="absolute top-6 left-6 z-10 rounded-full bg-paper/90 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-ink backdrop-blur-sm sm:top-10 sm:left-10">
+              {tag}
+            </span>
+          )}
+          <span class="absolute right-6 bottom-6 z-10 hidden items-center gap-1.5 rounded-full bg-ink/85 px-4 py-2 text-xs font-semibold text-paper opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 sm:right-10 sm:bottom-9 sm:inline-flex">
+            View case study →
+          </span>
+
+          <Image
+            src={cover}
+            alt={coverAlt}
+            width={2000}
+            quality={92}
+            loading={priority ? 'eager' : 'lazy'}
+            class="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+          />
+        </div>
+      </div>
+
+      {/* Title and meta read underneath, like a caption */}
+      <div class="wrap mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h3 class="font-display text-[clamp(1.75rem,3.6vw,2.75rem)] leading-tight font-medium tracking-[-0.01em] transition-colors group-hover:text-accent">
+            {title}
+          </h3>
+          <p class="measure mt-3 text-lg leading-relaxed text-ink-soft">{summary}</p>
+        </div>
+
+        <div class="flex shrink-0 items-center gap-6 sm:flex-col sm:items-end sm:gap-2 sm:text-right">
+          <p class="text-sm text-ink-soft">
+            {role} · {timeline}
+          </p>
+          <span class="inline-flex items-center gap-2 text-sm font-semibold sm:hidden">
+            View case study
+            <span
+              aria-hidden="true"
+              class="text-lg transition-transform duration-300 group-hover:translate-x-1.5"
+            >
+              →
+            </span>
+          </span>
+        </div>
+      </div>
+    </a>
+  )
+}
