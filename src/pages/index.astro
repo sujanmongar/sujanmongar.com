@@ -2,17 +2,14 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import WorkList from '../components/WorkList.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import Process from '../components/Process.astro';
-import SectionKicker from '../components/SectionKicker.astro';
 
-const featured = (await getCollection('work', ({ data }) => !data.draft && data.featured)).sort(
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
 );
-const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.order - b.data.order
-);
-const projects = featured.length > 0 ? featured : allWork.slice(0, 4);
+const featured = work.filter((p) => p.data.featured);
+const projects = (featured.length > 0 ? featured : work).slice(0, 4);
 ---
 
 <BaseLayout
@@ -21,15 +18,21 @@ const projects = featured.length > 0 ? featured : allWork.slice(0, 4);
 >
   <Hero />
 
-  <section id="selected-work" data-reveal class="mx-auto max-w-6xl px-6 py-16 sm:py-20">
-    <div class="flex items-end justify-between">
-      <SectionKicker label="Selected work" />
-      <a href="/work/" class="text-sm font-semibold text-ink-soft transition-colors hover:text-accent">
-        View all works →
-      </a>
-    </div>
-    <div class="mt-8">
-      <WorkList projects={projects} />
+  <section id="selected-work" class="section border-t border-line/70">
+    <div class="wrap">
+      <div class="flex items-baseline justify-between gap-6">
+        <h2 class="font-display text-3xl font-medium sm:text-4xl">Selected work</h2>
+        <a
+          href="/work/"
+          class="shrink-0 text-sm font-semibold text-ink-soft transition-colors hover:text-accent"
+        >
+          View all →
+        </a>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-14 sm:mt-14 sm:grid-cols-2 sm:gap-x-10">
+        {projects.map((project, i) => <ProjectCard project={project} priority={i === 0} />)}
+      </div>
     </div>
   </section>
 

@@ -26,7 +26,7 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
 
 <BaseLayout title={title} description={summary} image={cover.src} type="article">
   <article>
-    <header class="mx-auto max-w-3xl px-6 pt-16 sm:pt-20">
+    <header class="wrap pt-16 sm:pt-20">
       <a href="/work/" class="text-sm font-semibold text-ink-soft transition-colors hover:text-accent">
         ← All work
       </a>
@@ -95,15 +95,15 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
       }
     </header>
 
-    <div class="prose-case mx-auto max-w-3xl px-6 py-16 sm:py-20">
+    <div class="prose-case wrap py-16 sm:py-20">
       <Content />
     </div>
   </article>
 
-  <nav class="border-t border-line/70 bg-paper px-6 py-16 sm:py-20" aria-label="More projects">
+  <nav class="border-t border-line/70 bg-paper" aria-label="More projects">
     <div
       class:list={[
-        'mx-auto grid max-w-4xl gap-5',
+        'wrap section grid gap-8',
         prevProject && nextProject ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:max-w-2xl'
       ]}
     >

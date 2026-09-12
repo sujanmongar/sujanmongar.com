@@ -1,6 +1,4 @@
 ---
-import SectionKicker from './SectionKicker.astro';
-
 // Email is intentionally absent — the form below replaces it
 const links = [
   { href: 'https://www.linkedin.com/in/sujanmongar/', label: 'LinkedIn' },
@@ -15,14 +13,11 @@ const accessKey =
 ---
 
 <footer id="get-in-touch" class="border-t border-line/70 bg-paper-dim">
-  <div class="mx-auto max-w-6xl px-6 py-20 sm:py-28" data-reveal>
+  <div class="wrap section" data-reveal>
     <div class="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-20">
       <div>
-        <SectionKicker label="Get in touch" />
-        <h2 class="font-display mt-4 max-w-md text-4xl font-medium italic sm:text-5xl">
-          Tell me what you're building.
-        </h2>
-        <p class="mt-5 max-w-sm text-ink-soft">
+        <h2 class="font-display text-3xl font-medium sm:text-4xl">Get in touch</h2>
+        <p class="measure mt-5 text-ink-soft">
           Share a bit about the product and timeline — I read every message myself and reply
           directly, usually within a day or two.
         </p>

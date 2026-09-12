@@ -23,6 +23,29 @@
   color-scheme: light;
 }
 
+/* ---- Layout system -------------------------------------------------------
+   One container and one vertical rhythm, used by every section on every page,
+   so content lines up consistently as you scroll and between pages. */
+.wrap {
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.section {
+  padding-block: clamp(4rem, 9vw, 7rem);
+}
+
+.section-tight {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* Comfortable reading measure for body copy */
+.measure {
+  max-width: 38rem;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;

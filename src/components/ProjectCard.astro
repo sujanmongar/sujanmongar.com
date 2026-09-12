@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'work'>;
+  priority?: boolean;
+}
+
+const { project, priority = false } = Astro.props;
+const { title, summary, cover, coverAlt, tags, timeline } = project.data;
+---
+
+<a href={`/work/${project.id}/`} class="group block">
+  <div class="overflow-hidden rounded-xl bg-paper-dim">
+    <Image
+      src={cover}
+      alt={coverAlt}
+      width={1200}
+      quality={92}
+      loading={priority ? 'eager' : 'lazy'}
+      class="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+    />
+  </div>
+
+  <div class="mt-6 flex items-baseline justify-between gap-6">
+    <h3
+      class="font-display text-2xl leading-tight font-medium italic transition-colors group-hover:text-accent sm:text-3xl"
+    >
+      {title}
+    </h3>
+    <span class="shrink-0 text-sm text-ink-soft">{timeline}</span>
+  </div>
+
+  <p class="measure mt-3 text-ink-soft">{summary}</p>
+
+  <ul class="mt-5 flex flex-wrap gap-2">
+    {
+      tags.slice(0, 3).map((tag) => (
+        <li class="rounded-full bg-paper-dim px-3 py-1 text-xs font-medium text-ink-soft">{tag}</li>
+      ))
+    }
+  </ul>
+</a>

@@ -1,165 +1,32 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
 
 const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
 );
-
-// Filters come from the tags actually used, so they stay correct as work is added
-const tagCounts = new Map<string, number>();
-for (const project of work) {
-  for (const tag of project.data.tags) {
-    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
-  }
-}
-const filters = [...tagCounts.entries()]
-  .filter(([, count]) => count > 1 || work.length < 4)
-  .map(([tag]) => tag)
-  .sort();
 ---
 
 <BaseLayout
   title="Work"
   description="UX/UI case studies by Sujan Mongar — research, audits, and high-fidelity design for web and mobile products."
 >
-  <section class="mx-auto max-w-7xl px-6 pt-16 pb-10 sm:pt-24">
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-      <p class="text-sm font-medium tracking-[0.15em] text-ink-soft uppercase lg:col-span-3">
-        Selected work
+  <section class="section-tight">
+    <div class="wrap">
+      <h1 class="font-display text-[2.25rem] leading-tight font-medium sm:text-6xl">Work</h1>
+      <p class="measure mt-6 text-lg leading-relaxed text-ink-soft">
+        Case studies from product design engagements — research, UX audits, and high-fidelity UI
+        across web and mobile.
       </p>
-      <div class="lg:col-span-9">
-        <h1 class="font-display text-5xl leading-[1.05] font-medium sm:text-7xl">
-          Work I'm <em class="text-accent not-italic">proud</em> of
-        </h1>
-        <p class="mt-8 max-w-xl text-lg text-ink-soft">
-          Case studies from product design engagements — research, UX audits, and high-fidelity UI
-          across web and mobile.
-        </p>
+    </div>
+  </section>
+
+  <section class="pb-[clamp(4rem,9vw,7rem)]">
+    <div class="wrap">
+      <div class="grid grid-cols-1 gap-14 sm:grid-cols-2 sm:gap-x-10">
+        {work.map((project, i) => <ProjectCard project={project} priority={i === 0} />)}
       </div>
     </div>
-
-    {
-      filters.length > 1 && (
-        <div
-          class="mt-14 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line/70 pt-6"
-          id="work-filters"
-        >
-          <span class="text-xs font-semibold tracking-[0.15em] text-ink-soft/70 uppercase">
-            Filter
-          </span>
-          <button
-            type="button"
-            data-filter="all"
-            class="filter-chip text-sm font-semibold text-ink underline decoration-accent decoration-2 underline-offset-8"
-            aria-pressed="true"
-          >
-            All work
-          </button>
-          {filters.map((tag) => (
-            <button
-              type="button"
-              data-filter={tag}
-              class="filter-chip text-sm font-semibold text-ink-soft underline decoration-transparent decoration-2 underline-offset-8 transition-colors hover:text-ink"
-              aria-pressed="false"
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-      )
-    }
-  </section>
-
-  <section class="mx-auto max-w-7xl px-6 pb-24">
-    <div id="work-grid">
-      {
-        work.map((project, i) => (
-          <a
-            href={`/work/${project.id}/`}
-            class="work-card group grid grid-cols-1 items-center gap-8 border-t border-line/70 py-12 lg:grid-cols-12 lg:gap-16 lg:py-20"
-            data-tags={project.data.tags.join('|')}
-          >
-            <div
-              class:list={[
-                'overflow-hidden rounded-xl bg-paper-dim lg:col-span-7',
-                i % 2 === 1 && 'lg:order-2'
-              ]}
-            >
-              <Image
-                src={project.data.cover}
-                alt={project.data.coverAlt}
-                width={1400}
-                quality={92}
-                loading={i === 0 ? 'eager' : 'lazy'}
-                class="h-auto w-full transition-transform duration-700 group-hover:scale-[1.04]"
-              />
-            </div>
-
-            <div class:list={['lg:col-span-5', i % 2 === 1 && 'lg:order-1']}>
-              <span class="font-mono text-xs text-ink-soft/70">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <h2 class="font-display mt-4 text-3xl leading-tight font-medium italic transition-colors group-hover:text-accent sm:text-5xl">
-                {project.data.title}
-              </h2>
-              <p class="mt-5 max-w-md text-ink-soft">{project.data.summary}</p>
-
-              <ul class="mt-6 flex flex-wrap gap-2">
-                {project.data.tags.slice(0, 3).map((tag) => (
-                  <li class="rounded-full bg-paper-dim px-3 py-1 text-xs font-medium text-ink-soft">
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-
-              <div class="mt-8 flex items-center gap-3 text-sm font-semibold">
-                <span class="transition-colors group-hover:text-accent">Read case study</span>
-                <span
-                  aria-hidden="true"
-                  class="text-xl transition-transform duration-300 group-hover:translate-x-1.5 group-hover:text-accent"
-                >
-                  →
-                </span>
-              </div>
-            </div>
-          </a>
-        ))
-      }
-    </div>
-
-    <p class="hidden py-16 text-ink-soft" id="work-empty">Nothing in that category yet.</p>
   </section>
 </BaseLayout>
-
-<script>
-  const chips = document.querySelectorAll<HTMLButtonElement>('.filter-chip');
-  const cards = document.querySelectorAll<HTMLAnchorElement>('.work-card');
-  const empty = document.getElementById('work-empty');
-
-  chips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      const filter = chip.dataset.filter ?? 'all';
-
-      chips.forEach((other) => {
-        const on = other === chip;
-        other.setAttribute('aria-pressed', String(on));
-        other.classList.toggle('text-ink', on);
-        other.classList.toggle('decoration-accent', on);
-        other.classList.toggle('text-ink-soft', !on);
-        other.classList.toggle('decoration-transparent', !on);
-      });
-
-      let shown = 0;
-      cards.forEach((card) => {
-        const tags = (card.dataset.tags ?? '').split('|');
-        const match = filter === 'all' || tags.includes(filter);
-        card.hidden = !match;
-        if (match) shown += 1;
-      });
-
-      empty?.classList.toggle('hidden', shown > 0);
-    });
-  });
-</script>

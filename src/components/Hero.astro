@@ -1,67 +1,24 @@
 ---
-import { Image } from 'astro:assets';
-import portrait from '../assets/sujan.webp';
 ---
 
-{/* Mobile-first: one readable column, sized up rather than rearranged on wider screens */}
-<section class="border-b border-line/70">
-  <div class="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20 sm:pb-24">
-    <div class="flex items-center gap-4">
-      <Image
-        src={portrait}
-        alt="Sujan Mongar"
-        width={160}
-        quality={92}
-        loading="eager"
-        fetchpriority="high"
-        class="size-14 shrink-0 rounded-full object-cover object-top sm:size-16"
-      />
-      <div>
-        <p class="font-medium">Sujan Mongar</p>
-        <p class="text-sm text-ink-soft">Product Designer (UX/UI) · Thimphu, Bhutan</p>
-      </div>
-    </div>
-
-    {/* Kuzu Zangpo La — the Bhutanese greeting, used here as the welcome */}
-    <p class="mt-10 flex items-center gap-2 text-base text-ink-soft sm:mt-12">
+{/* Deliberately spare: a greeting, one claim, and where to go next. */}
+<section class="section">
+  <div class="wrap">
+    <p class="flex items-center gap-2 text-ink-soft">
       <span aria-hidden="true">👋</span>
       <span><span class="font-medium text-ink">Kuzu Zangpo La</span> — welcome.</span>
     </p>
 
     <h1
-      class="font-display mt-4 text-[2.1rem] leading-[1.15] font-medium sm:text-5xl sm:leading-[1.1] lg:text-6xl"
+      class="font-display mt-6 text-[2.25rem] leading-[1.12] font-medium sm:mt-8 sm:text-6xl sm:leading-[1.05] lg:text-7xl"
     >
       Designing products that are <em class="text-accent not-italic">clear</em>, usable and built
       to <em class="italic">scale.</em>
     </h1>
 
-    <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft sm:mt-8">
-      I work with startups and growing teams on UX audits, research and high-fidelity UI for web
-      and mobile — turning unclear products into ones people can actually use.
-    </p>
-
-    <div class="mt-9 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
-      <a
-        href="#selected-work"
-        class="rounded-full bg-ink px-6 py-3.5 text-center text-sm font-semibold text-paper transition-colors hover:bg-accent"
-      >
-        See selected work
-      </a>
-      <a
-        href="#get-in-touch"
-        class="rounded-full border border-ink/15 px-6 py-3.5 text-center text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
-      >
-        Get in touch
-      </a>
-    </div>
-
-    <p class="mt-9 flex items-center gap-2.5 text-sm text-ink-soft sm:mt-10">
-      <span class="relative flex size-2">
-        <span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60"
-        ></span>
-        <span class="relative inline-flex size-2 rounded-full bg-accent"></span>
-      </span>
-      Available for freelance work and full-time roles
+    <p class="measure mt-8 text-lg leading-relaxed text-ink-soft sm:mt-10">
+      Sujan Mongar — Product Designer (UX/UI) in Thimphu, Bhutan. Currently available for
+      freelance work and full-time roles.
     </p>
   </div>
 </section>

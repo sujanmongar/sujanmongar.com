@@ -7,7 +7,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="sticky top-0 z-50 border-b border-line/70 bg-paper/85 backdrop-blur-md">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+  <div class="wrap flex items-center justify-between py-4">
     <a href="/" class="font-display text-lg font-semibold italic">
       Sujan Mongar
     </a>
@@ -39,7 +39,7 @@ const currentPath = Astro.url.pathname;
       </a>
     </nav>
   </div>
-  <nav class="flex items-center gap-5 border-t border-line/70 px-6 py-2.5 text-sm font-medium sm:hidden">
+  <nav class="wrap flex items-center gap-5 border-t border-line/70 py-2.5 text-sm font-medium sm:hidden">
     {
       navItems.map((item) => {
         const active = item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
