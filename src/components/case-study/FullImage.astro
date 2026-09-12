@@ -6,16 +6,19 @@ interface Props {
   src: ImageMetadata;
   alt: string;
   dark?: boolean;
+  plain?: boolean;
+  bleed?: boolean;
 }
 
-const { src, alt, dark = false } = Astro.props;
+const { src, alt, dark = false, plain = false, bleed = false } = Astro.props;
 ---
 
 <div class="full-bleed my-8 px-4 sm:px-6">
   <div
     class:list={[
-      'overflow-hidden rounded-3xl px-8 py-16 sm:px-20 sm:py-24',
-      dark ? 'showcase-dark' : 'showcase-grey'
+      'overflow-hidden rounded-3xl',
+      !bleed && 'px-8 py-16 sm:px-20 sm:py-24',
+      plain ? '' : dark ? 'showcase-dark' : 'showcase-grey'
     ]}
   >
     <Image src={src} alt={alt} width={2400} quality={100} loading="lazy" class="mx-auto h-auto w-full" />

@@ -11,16 +11,14 @@ interface GridItem {
 interface Props {
   items: GridItem[];
   dark?: boolean;
-  logo?: ImageMetadata;
-  logoAlt?: string;
 }
 
-const { items, dark = false, logo, logoAlt } = Astro.props;
+const { items, dark = false } = Astro.props;
 ---
 
 <div class="full-bleed my-8 px-4 sm:px-6">
-  <div class:list={['rounded-3xl p-6 sm:p-14', dark ? 'showcase-dark' : 'showcase-grey']}>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
+  <div class:list={['rounded-3xl p-8 sm:p-14', dark ? 'showcase-dark' : 'showcase-grey']}>
+    <div class="grid grid-cols-1 items-start gap-8 sm:grid-cols-2 sm:gap-14">
       {
         items.map((item) => (
           <div class:list={[item.span === 2 && 'sm:col-span-2']}>
@@ -36,18 +34,5 @@ const { items, dark = false, logo, logoAlt } = Astro.props;
         ))
       }
     </div>
-    {
-      logo && (
-        <div class="mt-10 sm:mt-14">
-          <Image
-            src={logo}
-            alt={logoAlt ?? ''}
-            width={360}
-            quality={100}
-            class="mx-auto h-auto w-full max-w-[220px]"
-          />
-        </div>
-      )
-    }
   </div>
 </div>
