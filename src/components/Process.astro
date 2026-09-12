@@ -15,10 +15,11 @@ const steps = [
       A short path from an unclear problem to design your team can build.
     </p>
 
-    {/* A real dividing line only at the breakpoint where all four steps sit
-        in one row — at two columns it would wrongly cut across row 2 as
-        well, so it's skipped there rather than drawn half-right. */}
-    <ol class="stagger mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-white/15">
+    {/* Full outline around the group, so it reads as one bordered grid —
+        internal vertical rules only kick in at the breakpoint where all
+        four steps sit in one row; at two columns they'd wrongly cut
+        across row 2 as well, so they're skipped there. */}
+    <ol class="stagger mt-14 grid grid-cols-1 gap-x-10 gap-y-12 border border-white/15 p-8 sm:grid-cols-2 sm:p-10 lg:grid-cols-4 lg:divide-x lg:divide-white/15 lg:p-12">
       {
         steps.map((step) => (
           <li class="lg:px-2 lg:first:pl-0" data-reveal>

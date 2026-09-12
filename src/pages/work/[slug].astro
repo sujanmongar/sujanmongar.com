@@ -154,62 +154,97 @@ const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1
   </article>
 
   {
-    (prevProject || nextProject) && (
+    prevProject && nextProject && (
       <nav class="border-t border-line/70 bg-paper" aria-label="More projects">
-        {/* Always two columns, prev on the left and next mirrored to the
-            right — so a lone entry sits on the side that matches its
-            direction, instead of always hugging the left edge. */}
+        {/* Two columns, prev on the left and next mirrored to the right */}
         <div class="wrap grid grid-cols-1 gap-10 pt-12 pb-16 sm:grid-cols-2 sm:pt-14 sm:pb-20">
-          {prevProject && (
-            <a href={`/work/${prevProject.id}/`} class="group flex items-center gap-6 sm:col-start-1">
-              <div class="w-32 shrink-0 overflow-hidden rounded-lg sm:w-44">
-                <Image
-                  src={prevProject.data.cover}
-                  alt={prevProject.data.coverAlt}
-                  width={500}
-                  quality={92}
-                  loading="lazy"
-                  class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
-                />
-              </div>
-              <div class="min-w-0">
-                <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
-                  ← Previous project
-                </p>
-                <h2 class="font-display mt-2 text-2xl font-medium transition-colors group-hover:text-accent sm:text-3xl">
-                  {prevProject.data.title}
-                </h2>
-              </div>
-            </a>
-          )}
+          <a href={`/work/${prevProject.id}/`} class="group flex items-center gap-6 sm:col-start-1">
+            <div class="w-32 shrink-0 overflow-hidden rounded-lg sm:w-44">
+              <Image
+                src={prevProject.data.cover}
+                alt={prevProject.data.coverAlt}
+                width={500}
+                quality={92}
+                loading="lazy"
+                class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
+                ← Previous project
+              </p>
+              <h2 class="font-display mt-2 text-2xl font-medium transition-colors group-hover:text-accent sm:text-3xl">
+                {prevProject.data.title}
+              </h2>
+            </div>
+          </a>
 
-          {nextProject && (
-            <a
-              href={`/work/${nextProject.id}/`}
-              class="group flex items-center gap-6 sm:col-start-2 sm:flex-row-reverse sm:text-right"
-            >
-              <div class="w-32 shrink-0 overflow-hidden rounded-lg sm:w-44">
-                <Image
-                  src={nextProject.data.cover}
-                  alt={nextProject.data.coverAlt}
-                  width={500}
-                  quality={92}
-                  loading="lazy"
-                  class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
-                />
-              </div>
-              <div class="min-w-0">
-                <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
-                  Next project →
-                </p>
-                <h2 class="font-display mt-2 text-2xl font-medium transition-colors group-hover:text-accent sm:text-3xl">
-                  {nextProject.data.title}
-                </h2>
-              </div>
-            </a>
-          )}
+          <a
+            href={`/work/${nextProject.id}/`}
+            class="group flex items-center gap-6 sm:col-start-2 sm:flex-row-reverse sm:text-right"
+          >
+            <div class="w-32 shrink-0 overflow-hidden rounded-lg sm:w-44">
+              <Image
+                src={nextProject.data.cover}
+                alt={nextProject.data.coverAlt}
+                width={500}
+                quality={92}
+                loading="lazy"
+                class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
+                Next project →
+              </p>
+              <h2 class="font-display mt-2 text-2xl font-medium transition-colors group-hover:text-accent sm:text-3xl">
+                {nextProject.data.title}
+              </h2>
+            </div>
+          </a>
         </div>
       </nav>
     )
+  }
+
+  {
+    /* Only one direction to go (first or last project) — a single centered,
+       larger block reads better than a small block pinned to one side of a
+       mostly-empty row. */
+    (prevProject || nextProject) &&
+      !(prevProject && nextProject) &&
+      (() => {
+        const solo = prevProject ?? nextProject!;
+        const label = prevProject ? '← Previous project' : 'Next project →';
+        return (
+          <nav class="border-t border-line/70 bg-paper" aria-label="More projects">
+            <div class="wrap flex flex-col items-center py-16 text-center sm:py-20">
+              <a
+                href={`/work/${solo.id}/`}
+                class="group inline-flex flex-col items-center gap-8 sm:flex-row sm:gap-10"
+              >
+                <div class="w-48 shrink-0 overflow-hidden rounded-xl sm:w-64">
+                  <Image
+                    src={solo.data.cover}
+                    alt={solo.data.coverAlt}
+                    width={800}
+                    quality={92}
+                    loading="lazy"
+                    class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div>
+                  <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
+                    {label}
+                  </p>
+                  <h2 class="font-display mt-3 text-3xl font-medium transition-colors group-hover:text-accent sm:text-5xl">
+                    {solo.data.title}
+                  </h2>
+                </div>
+              </a>
+            </div>
+          </nav>
+        );
+      })()
   }
 </BaseLayout>
