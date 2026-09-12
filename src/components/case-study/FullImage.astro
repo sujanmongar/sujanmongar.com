@@ -5,27 +5,20 @@ import type { ImageMetadata } from 'astro:assets';
 interface Props {
   src: ImageMetadata;
   alt: string;
-  caption?: string;
   dark?: boolean;
 }
 
-const { src, alt, caption, dark = false } = Astro.props;
+const { src, alt, dark = false } = Astro.props;
 ---
 
-<figure class="full-bleed my-16">
-  <div class:list={['py-10 sm:py-16', dark && 'bg-ink']}>
-    <Image
-      src={src}
-      alt={alt}
-      width={2400}
-      height={1500}
-      loading="lazy"
-      class="mx-auto max-w-5xl w-full px-6 object-contain"
-    />
-  </div>
-  {
-    caption && (
-      <figcaption class="mt-4 text-center text-sm text-ink-soft">{caption}</figcaption>
-    )
-  }
-</figure>
+<div class:list={['full-bleed py-8 sm:py-12', dark && 'bg-ink']}>
+  <Image
+    src={src}
+    alt={alt}
+    width={2400}
+    height={1500}
+    quality={100}
+    loading="lazy"
+    class="mx-auto w-full max-w-6xl object-contain"
+  />
+</div>

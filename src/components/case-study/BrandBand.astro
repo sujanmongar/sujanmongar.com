@@ -12,12 +12,17 @@ interface Props {
 const { text, logo, logoAlt, dark = true } = Astro.props;
 ---
 
-<div
-  class:list={['full-bleed my-16 py-20 sm:py-28', dark ? 'bg-ink' : 'bg-paper-dim']}
->
+<div class:list={['full-bleed py-20 sm:py-28', dark ? 'bg-ink' : 'bg-paper-dim']}>
   {
     logo ? (
-      <Image src={logo} alt={logoAlt ?? ''} width={480} height={160} class="mx-auto w-auto max-w-xs object-contain" />
+      <Image
+        src={logo}
+        alt={logoAlt ?? ''}
+        width={480}
+        height={160}
+        quality={100}
+        class="mx-auto w-auto max-w-xs object-contain"
+      />
     ) : (
       <p
         class:list={[

@@ -20,7 +20,8 @@ const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
 );
 const currentIndex = allWork.findIndex((p) => p.id === entry.id);
-const nextProject = allWork[(currentIndex + 1) % allWork.length];
+const prevProject = currentIndex > 0 ? allWork[currentIndex - 1] : null;
+const nextProject = currentIndex < allWork.length - 1 ? allWork[currentIndex + 1] : null;
 ---
 
 <BaseLayout title={title} description={summary} image={cover.src} type="article">
@@ -111,21 +112,44 @@ const nextProject = allWork[(currentIndex + 1) % allWork.length];
     </div>
   </article>
 
-  <a
-    href={`/work/${nextProject.id}/`}
-    class="group block border-t border-line/70 bg-paper-dim px-6 py-16 transition-colors hover:bg-accent-soft sm:py-24"
+  <div
+    class:list={[
+      'grid border-t border-line/70 bg-paper-dim',
+      prevProject && nextProject ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'
+    ]}
   >
-    <div class="mx-auto max-w-3xl text-center">
-      <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">Next project</p>
-      <h2 class="font-display mt-4 text-4xl font-medium italic transition-colors group-hover:text-accent sm:text-6xl">
-        {nextProject.data.title}
-      </h2>
-      <span
-        aria-hidden="true"
-        class="mt-6 inline-block text-2xl text-ink-soft transition-transform duration-300 group-hover:translate-x-2 group-hover:text-accent"
-      >
-        →
-      </span>
-    </div>
-  </a>
+    {
+      prevProject && (
+        <a
+          href={`/work/${prevProject.id}/`}
+          class:list={[
+            'group block px-6 py-16 text-center transition-colors hover:bg-accent-soft sm:py-24',
+            nextProject && 'border-b border-line/70 sm:border-r sm:border-b-0'
+          ]}
+        >
+          <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
+            ← Previous project
+          </p>
+          <h2 class="font-display mt-4 text-3xl font-medium italic transition-colors group-hover:text-accent sm:text-5xl">
+            {prevProject.data.title}
+          </h2>
+        </a>
+      )
+    }
+    {
+      nextProject && (
+        <a
+          href={`/work/${nextProject.id}/`}
+          class="group block px-6 py-16 text-center transition-colors hover:bg-accent-soft sm:py-24"
+        >
+          <p class="text-sm font-semibold tracking-wide text-ink-soft uppercase">
+            Next project →
+          </p>
+          <h2 class="font-display mt-4 text-3xl font-medium italic transition-colors group-hover:text-accent sm:text-5xl">
+            {nextProject.data.title}
+          </h2>
+        </a>
+      )
+    }
+  </div>
 </BaseLayout>
