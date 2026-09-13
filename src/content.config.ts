@@ -46,15 +46,4 @@ const experience = defineCollection({
   }),
 });
 
-const testimonials = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/testimonials" }),
-  schema: z.object({
-    quote: z.string(),
-    name: z.string(),
-    role: z.string(),
-    company: z.string().optional(),
-    order: z.number().default(0),
-  }),
-});
-
-export const collections = { work, experience, testimonials };
+export const collections = { work, experience };
