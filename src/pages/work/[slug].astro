@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, summary, overview, cover, coverAlt, role, timeline, deliverables, client, link, figma, tags } =
+const { title, summary, overview, cover, coverAlt, role, timeline, deliverables, client, link, demo, figma, tags } =
   entry.data;
 
 const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
@@ -141,7 +141,7 @@ const datePublished = timelineToISO(timeline);
       </dl>
 
       {
-        (link || figma) && (
+        (link || demo || figma) && (
           <div class="mt-6 flex flex-wrap gap-4">
             {link && (
               <a
@@ -151,6 +151,16 @@ const datePublished = timelineToISO(timeline);
                 class="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-accent"
               >
                 View live site ↗
+              </a>
+            )}
+            {demo && (
+              <a
+                href={demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-accent"
+              >
+                Try the live demo ↗
               </a>
             )}
             {figma && (
