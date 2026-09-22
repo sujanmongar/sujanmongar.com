@@ -9,6 +9,8 @@ tags: [Dating, UI/UX, Mobile App Design]
 role: UI/UX Designer
 timeline: February 2026
 deliverables: [UX Strategy, UI Design, Prototyping]
+demo: "https://arogaro.pages.dev/"
+demoLabel: View landing page
 featured: true
 order: 3
 ---
@@ -16,6 +18,7 @@ order: 3
 import FullImage from "../../../components/case-study/FullImage.astro";
 import Section from "../../../components/case-study/Section.astro";
 import hero from "./hero.webp";
+import landing from "./landing-page.webp";
 
 <FullImage
   src={hero}
@@ -45,4 +48,15 @@ subscriptions, designed as one cohesive UI system rather than a set of disconnec
   scoring, and location and zodiac details shown up front.
 - Structured a clear free-to-paid subscription model, from unlimited swipes to unlimited chats.
 - Kept Events, Matches, Discover, Chats, and Profile consistent as one navigation system.
+</Section>
+
+<Section title="Landing page">
+Alongside the app, I designed and built the public landing page — the first thing people see
+before the app launches. It introduces the product, walks through how it works, and drives
+sign-ups to the waitlist, with the app's own UI shown in context on device.
+
+<FullImage
+  src={landing}
+  alt="Arogaro landing page hero with the tagline and app screens on two phones"
+/>
 </Section>

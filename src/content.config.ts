@@ -30,6 +30,8 @@ const work = defineCollection({
       // A coded, clickable recreation of the design, hosted separately.
       // Distinct from `link` so a demo is never presented as the live product.
       demo: z.string().url().optional(),
+      // Button label for `demo`, e.g. "View landing page". Defaults to "Try the live demo".
+      demoLabel: z.string().optional(),
       figma: z.string().url().optional(),
       featured: z.boolean().default(false),
       order: z.number().default(0),

@@ -16,7 +16,7 @@ UI, and design systems, for both web and mobile products.
 
 - [Cab Booking Platform for Bhutan](https://sujanmongar.com/work/cab-booking-platform-for-bhutan/): A mobile-responsive cab-booking platform (DrukDrive) for tourists, locals, and long-distance travelers across Bhutan. A coded, clickable demo of the design is at https://drukdrive.vercel.app/.
 - [OneClickShop — Website Revamp](https://sujanmongar.com/work/oneclickshop-website-revamp/): A complete e-commerce redesign for an online grocery and home-delivery service in Thimphu, Bhutan.
-- [Arogaro — Bhutan's First Matchmaking App](https://sujanmongar.com/work/arogaro-matchmaking-app/): A mobile-first matchmaking app built around verified profiles and trust.
+- [Arogaro — Bhutan's First Matchmaking App](https://sujanmongar.com/work/arogaro-matchmaking-app/): A mobile-first matchmaking app built around verified profiles and trust. A coded landing page for the app is at https://arogaro.pages.dev/.
 - [BazaGuru — Digital Chanting App for Bhutan](https://sujanmongar.com/work/bazaguru-digital-chanting-app/): A digital chanting and prayer companion app bringing mantra counting into a mobile-first product.
 
 ## Contact
