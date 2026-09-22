@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import ArrowButton from './ArrowButton.astro';
 
@@ -41,12 +41,19 @@ const tag = coverTag ?? project.data.tags[0];
             wide (spanning) card gets a wider frame to match. */}
         <div class:list={['relative aspect-[3/2]', wide && 'sm:aspect-[21/9]']}>
           <div class="absolute inset-0 p-[8%]">
-            <Image
+            {/* Sizes are the measured slot widths: one column below sm, two at sm+,
+                capped by .wrap at 1360px; the 8% padding leaves 84% for the image. */}
+            <Picture
               src={cover}
               alt={coverAlt}
-              width={1400}
-              quality={92}
-              loading={priority ? 'eager' : 'lazy'}
+              formats={['avif']}
+              fallbackFormat="webp"
+              widths={wide ? [480, 640, 828, 1080, 1280, 1600, 2200] : [480, 640, 828, 1080]}
+              sizes={wide
+                ? '(min-width: 1360px) 1102px, calc(84vw - 40px)'
+                : '(min-width: 1360px) 531px, (min-width: 640px) calc(42vw - 40px), calc(84vw - 40px)'}
+              priority={priority}
+              pictureAttributes={{ class: 'contents' }}
               class="h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             />
           </div>
@@ -83,12 +90,15 @@ const tag = coverTag ?? project.data.tags[0];
               height the way padding on an auto-height box would. */}
           <div class="relative aspect-[3/2]">
             <div class="absolute inset-0 p-[8%]">
-              <Image
+              <Picture
                 src={cover}
                 alt={coverAlt}
-                width={2000}
-                quality={92}
-                loading={priority ? 'eager' : 'lazy'}
+                formats={['avif']}
+                fallbackFormat="webp"
+                widths={[480, 640, 828, 1080, 1280, 1600, 2200]}
+                sizes="(min-width: 1360px) 1102px, calc(84vw - 40px)"
+                priority={priority}
+                pictureAttributes={{ class: 'contents' }}
                 class="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
               />
             </div>

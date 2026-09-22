@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import portrait from '../assets/sujan.webp';
 
@@ -105,12 +105,13 @@ const description =
   {/* Portrait and the statement sit side by side on desktop, stacked on mobile */}
   <section class="wrap grid grid-cols-1 gap-10 pb-[clamp(3rem,7vw,5rem)] lg:grid-cols-12 lg:gap-16" data-reveal>
     <div class="lg:col-span-5">
-      <Image
+      <Picture
         src={portrait}
         alt="Sujan Mongar"
-        width={1000}
-        quality={92}
-        loading="eager"
+        formats={['avif']}
+        fallbackFormat="webp"
+        priority
+        pictureAttributes={{ class: 'contents' }}
         class="aspect-[4/5] w-full rounded-2xl bg-paper-dim object-cover"
       />
     </div>
