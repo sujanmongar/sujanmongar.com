@@ -1,0 +1,6 @@
+# Old WordPress URLs -> new pages (301 keeps search rankings)
+/work/oneclickshop-web-revamp/ /work/oneclickshop-website-revamp/ 301
+/work/oneclickshop-web-revamp /work/oneclickshop-website-revamp/ 301
+/author/sujan/ /about/ 301
+/author/sujan /about/ 301
+/wp-content/uploads/2026/01/Design-Resume-SUJAN_MONGAR.pdf /resume.pdf 301
