@@ -99,6 +99,18 @@ const accessKey =
           <p data-error-for="message" class="mt-2 hidden text-sm text-danger"></p>
         </div>
 
+        {/* Honeypot: hidden from people and screen readers, so anything that
+            fills it is a bot. Web3Forms drops submissions where it is set. */}
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="hidden"
+          style="display:none"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+
         <div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <p id="contact-status" class="text-sm text-ink-soft" role="status" aria-live="polite">
             No newsletters. Just a reply.
@@ -123,6 +135,10 @@ const accessKey =
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const status = document.getElementById('contact-status');
+  // Bots submit within milliseconds of load; a person needs longer than this
+  // just to read the three fields.
+  const loadedAt = Date.now();
+  const MIN_FILL_MS = 3000;
   const accessKey = document.getElementById('contact-form')?.dataset.key ?? '';
 
   const showError = (field: string, message: string) => {
@@ -172,10 +188,17 @@ const accessKey =
       return;
     }
 
+    const data = new FormData(form);
+
+    if (data.get('botcheck') || Date.now() - loadedAt < MIN_FILL_MS) {
+      if (status) status.textContent = 'Please try that again in a moment.';
+      return;
+    }
+
     if (button) button.disabled = true;
     if (status) status.textContent = 'Sending…';
 
-    const data = new FormData(form);
+    data.delete('botcheck');
     data.append('access_key', accessKey);
     data.append('subject', `New message from ${data.get('name')} via sujanmongar.com`);
 

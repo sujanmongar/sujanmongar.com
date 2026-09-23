@@ -14,6 +14,24 @@ export default defineConfig({
 
   integrations: [mdx(), sitemap()],
 
+  // Content Security Policy. Astro hashes its own inline scripts/styles and
+  // emits a <meta> CSP per page; the directives below cover everything else
+  // the site loads. frame-ancestors can't live in a meta CSP, so clickjacking
+  // is covered by X-Frame-Options in public/_headers.
+  security: {
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'self' https://api.web3forms.com",
+        "form-action 'self' https://api.web3forms.com",
+        "base-uri 'self'",
+        "object-src 'none'"
+      ]
+    }
+  },
+
   // Per-format quality, measured against the lossless masters: AVIF 70 is
   // sharper than the old WebP-92-from-lossy pipeline at ~58% of the bytes.
   // Components don't pass `quality`, so this applies to every image.
