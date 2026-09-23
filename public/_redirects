@@ -4,3 +4,8 @@
 /author/sujan/ /about/ 301
 /author/sujan /about/ 301
 /wp-content/uploads/2026/01/Design-Resume-SUJAN_MONGAR.pdf /resume.pdf 301
+
+# Old WordPress sitemap URLs -> the new sitemap index
+/sitemap_index.xml /sitemap-index.xml 301
+/page-sitemap.xml /sitemap-index.xml 301
+/bricks_template-sitemap.xml /sitemap-index.xml 301
