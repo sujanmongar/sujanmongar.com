@@ -20,11 +20,14 @@ export default defineConfig({
   // is covered by X-Frame-Options in public/_headers.
   security: {
     csp: {
+      // Cloudflare injects its Web Analytics beacon into every response, so it
+      // has to be allowed explicitly or the policy blocks it.
+      scriptDirective: { resources: ["'self'", 'https://static.cloudflareinsights.com'] },
       directives: [
         "default-src 'self'",
         "img-src 'self' data:",
         "font-src 'self'",
-        "connect-src 'self' https://api.web3forms.com",
+        "connect-src 'self' https://api.web3forms.com https://cloudflareinsights.com https://static.cloudflareinsights.com",
         "form-action 'self' https://api.web3forms.com",
         "base-uri 'self'",
         "object-src 'none'"
