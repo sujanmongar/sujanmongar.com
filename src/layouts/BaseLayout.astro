@@ -21,7 +21,8 @@ const { title, description, image, type, noindex } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#ffffff" />
     <Seo title={title} description={description} image={image} type={type} noindex={noindex} />
     {/* [data-reveal] content is only ever made visible by the reveal script
